@@ -7,11 +7,17 @@
 param([Parameter(Mandatory = $true)][string]$Bin)
 $ErrorActionPreference = 'Stop'
 
-$kits = Join-Path ${env:ProgramFiles(x86)} 'Windows Kits\10\bin'
+$programFilesX86 = ${env:ProgramFiles(x86)}
+if (-not $programFilesX86) { $programFilesX86 = [Environment]::GetFolderPath('ProgramFilesX86') }
+$kits = Join-Path $programFilesX86 'Windows Kits\10\bin'
 $vers = @(Get-ChildItem $kits -Directory -ErrorAction SilentlyContinue | Where-Object { $_.Name -like '10.*' } | Sort-Object { [version]$_.Name } -Descending)
 function Tool($name) {
+  if ($env:TWINDESK_WINDOWS_SDK_BIN) {
+    $p = Join-Path $env:TWINDESK_WINDOWS_SDK_BIN $name
+    if (Test-Path $p) { return $p }
+  }
   foreach ($v in $vers) { foreach ($a in 'x64', 'arm64', 'x86') { $p = Join-Path $v.FullName "$a\$name"; if (Test-Path $p) { return $p } } }
-  throw "$name not found: install the Windows 10/11 SDK"
+  throw "$name not found: install the Windows 10/11 SDK or set TWINDESK_WINDOWS_SDK_BIN"
 }
 $makeappx = Tool 'makeappx.exe'
 $signtool = Tool 'signtool.exe'

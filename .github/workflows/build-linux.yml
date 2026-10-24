@@ -28,7 +28,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 26
 
       - name: Install native dependencies
         run: |
@@ -48,7 +48,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: linux
-        run: npm install
+        run: npm ci
 
       - name: Build Linux packages
         working-directory: linux
@@ -58,7 +58,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: twindesk-linux-x64
-          path: linux/dist/TwinDesk-*
+          path: |
+            linux/dist/TwinDesk-*
+            android/dist/TwinDesk-*.apk
 
       # Straight onto the release, no download and re-upload.
       - name: Upload to the release

@@ -10,14 +10,26 @@ set BIN=%~dp0bin
 rem Bluetooth LE and Wi-Fi Direct (Ble.cs, Wfd.cs) are WinRT: the Windows SDK's Windows.winmd (the one
 rem .NET's WinRT bridge is built against; System32\WinMetadata's split files don't work with it).
 set UM=
+set WINDOWS_WINMD=%TWINDESK_WINDOWS_WINMD%
 for /d %%d in ("%ProgramFiles(x86)%\Windows Kits\10\UnionMetadata\10.*") do if exist "%%d\Windows.winmd" set UM=%%d
-if not defined UM (
-  echo The Windows 10/11 SDK is needed ^(Windows Kits\10\UnionMetadata^): install it with Visual Studio Build Tools or the SDK installer.
+if not defined WINDOWS_WINMD if defined UM set WINDOWS_WINMD=%UM%\Windows.winmd
+if not defined WINDOWS_WINMD (
+  echo The Windows 10/11 SDK is needed ^(Windows Kits\10\UnionMetadata^), or set TWINDESK_WINDOWS_WINMD to Microsoft's Windows.winmd.
+  exit /b 1
+)
+if not exist "%WINDOWS_WINMD%" (
+  echo Windows metadata not found: %WINDOWS_WINMD%
   exit /b 1
 )
 set FW=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319
-set WINRT=/r:"%UM%\Windows.winmd" /r:"%FW%\System.Runtime.WindowsRuntime.dll" /r:"%FW%\System.Runtime.dll" ^
+set WINRT=/r:"%WINDOWS_WINMD%" /r:"%FW%\System.Runtime.WindowsRuntime.dll" /r:"%FW%\System.Runtime.dll" ^
   /r:"%FW%\System.Threading.Tasks.dll" /r:"%FW%\System.Runtime.InteropServices.WindowsRuntime.dll"
+rem NuGet's SDK Contracts package splits the union metadata into separate contract assemblies.
+if defined TWINDESK_WINDOWS_SDK_CONTRACTS set WINRT=%WINRT% ^
+  /r:"%TWINDESK_WINDOWS_SDK_CONTRACTS%\Windows.Foundation.FoundationContract.winmd" ^
+  /r:"%TWINDESK_WINDOWS_SDK_CONTRACTS%\Windows.Foundation.UniversalApiContract.winmd" ^
+  /r:"%TWINDESK_WINDOWS_SDK_CONTRACTS%\Windows.ApplicationModel.Calls.CallsPhoneContract.winmd" ^
+  /r:"%TWINDESK_WINDOWS_SDK_CONTRACTS%\Windows.ApplicationModel.Calls.CallsVoipContract.winmd"
 if not exist "%BIN%" mkdir "%BIN%"
 "%CSC%" /nologo /optimize+ /platform:anycpu /target:exe /out:"%BIN%\macshare-winhelper.new.exe" ^
   /r:System.Web.Extensions.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll %WINRT% "%~dp0src\*.cs" || exit /b 1
