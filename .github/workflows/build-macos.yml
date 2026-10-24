@@ -26,6 +26,12 @@ jobs:
         working-directory: mac
         run: npm ci
 
+      - name: Make the generated signing keychain visible to codesign
+        working-directory: mac
+        run: |
+          scripts/signing-identity.sh
+          security list-keychains -d user -s "$HOME/.twindesk-signing/signing.keychain-db"
+
       - name: Build and verify the Apple Silicon app
         working-directory: mac
         run: |
