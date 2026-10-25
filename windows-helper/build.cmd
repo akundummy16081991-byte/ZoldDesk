@@ -10,15 +10,15 @@ set BIN=%~dp0bin
 rem Bluetooth LE and Wi-Fi Direct (Ble.cs, Wfd.cs) are WinRT: the Windows SDK's Windows.winmd (the one
 rem .NET's WinRT bridge is built against; System32\WinMetadata's split files don't work with it).
 set UM=
-set WINDOWS_WINMD=%TWINDESK_WINDOWS_WINMD%
-for /d %%d in ("%ProgramFiles(x86)%\Windows Kits\10\UnionMetadata\10.*") do if exist "%%d\Windows.winmd" set UM=%%d
-if not defined WINDOWS_WINMD if defined UM set WINDOWS_WINMD=%UM%\Windows.winmd
+set "WINDOWS_WINMD=%TWINDESK_WINDOWS_WINMD%"
+for /d %%d in ("%ProgramFiles(x86)%\Windows Kits\10\UnionMetadata\10.*") do if exist "%%d\Windows.winmd" set "UM=%%d"
+if not defined WINDOWS_WINMD if defined UM set "WINDOWS_WINMD=%UM%\Windows.winmd"
 if not defined WINDOWS_WINMD (
   echo The Windows 10/11 SDK is needed ^(Windows Kits\10\UnionMetadata^), or set TWINDESK_WINDOWS_WINMD to Microsoft's Windows.winmd.
   exit /b 1
 )
 if not exist "%WINDOWS_WINMD%" (
-  echo Windows metadata not found: %WINDOWS_WINMD%
+  echo Windows metadata not found: "%WINDOWS_WINMD%"
   exit /b 1
 )
 set FW=%WINDIR%\Microsoft.NET\Framework64\v4.0.30319
