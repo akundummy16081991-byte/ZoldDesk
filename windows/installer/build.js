@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Builds the Windows installer (npm run dist): the helper, a staging folder with the same layout
 // as the repo (windows/, shared/protocol.js, windows-helper/bin/), then electron-builder → NSIS.
 // For a phone as the peer it also carries adb (downloaded, scripts/fetch-adb.js) and the
@@ -81,7 +81,7 @@ async function main() {
     copy(path.join(ROOT, 'mac', 'vendor', 'scrcpy-server'), path.join(STAGE, 'windows', 'vendor', 'scrcpy-server'));
   }
   await fetchAdb(path.join(STAGE, 'windows', 'vendor', 'adb'));
-  // TwinDesk for Android with notification access, which this PC installs over wireless debugging.
+  // ZoldDesk for Android with notification access, which this PC installs over wireless debugging.
   const dist = path.join(ROOT, 'android', 'dist');
   const full = fs.existsSync(dist) && fs.readdirSync(dist).filter((n) => /-full\.apk$/.test(n)).sort().pop();
   if (full) copy(path.join(dist, full), path.join(STAGE, 'windows', 'vendor', 'twindesk-android-full.apk'));
@@ -99,14 +99,14 @@ async function main() {
 }
 
 async function pack(arch) {
-  const name = 'TwinDesk-Setup-' + pkg.version + (arch === 'x64' ? '' : '-' + arch) + '.exe';
+  const name = 'ZoldDesk-Setup-' + pkg.version + (arch === 'x64' ? '' : '-' + arch) + '.exe';
   console.log('Packaging ' + arch + '…');
   await builder.build({
     targets: builder.Platform.WINDOWS.createTarget('nsis', builder.Arch[arch]),
     projectDir: WIN,
     config: {
       appId: 'org.macshare.windows',
-      productName: 'TwinDesk',
+      productName: 'ZoldDesk',
       copyright: 'Copyright (C) 2026 inukaasith',
       electronVersion,
       directories: { app: STAGE, output: path.join(WIN, 'dist') },
@@ -114,7 +114,7 @@ async function pack(arch) {
       npmRebuild: false,
       win: {
         icon: path.join(__dirname, 'icon.ico'),
-        executableName: 'TwinDesk',
+        executableName: 'ZoldDesk',
         // electron-builder signs with WIN_CSC_LINK when supplied. Don't silently release an
         // unsigned installer after the signing secret has been configured.
         forceCodeSigning: Boolean(process.env.WIN_CSC_LINK),
@@ -128,7 +128,7 @@ async function pack(arch) {
         uninstallerIcon: path.join(__dirname, 'icon.ico'),
         license: path.join(ROOT, 'LICENSE'),
         include: path.join(__dirname, 'installer.nsh'),
-        shortcutName: 'TwinDesk',
+        shortcutName: 'ZoldDesk',
         createDesktopShortcut: true,
         createStartMenuShortcut: true,
         runAfterFinish: true,

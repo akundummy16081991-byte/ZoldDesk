@@ -1,7 +1,7 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Update check (shared/updates.js on the computers): asks GitHub for the latest release of
-// TwinDesk, compares its tag with this app's version and picks this build's APK (the full one for
-// TwinDesk with notifications, the standard one otherwise). Nothing is installed here; Download
+// ZoldDesk, compares its tag with this app's version and picks this build's APK (the full one for
+// ZoldDesk with notifications, the standard one otherwise). Nothing is installed here; Download
 // opens the APK (or the release page) in the browser.
 //   prefs: updates.auto (check 15 s after start and every 6 hours), updates.notified (the last
 //   version a notification announced, so each one is told once).
@@ -51,7 +51,7 @@ class Updates(private val core: Core) {
         try {
             val req = Request.Builder().url(API)
                 .header("Accept", "application/vnd.github+json")
-                .header("User-Agent", "TwinDesk/$current")
+                .header("User-Agent", "ZoldDesk/$current")
                 .build()
             http.newCall(req).execute().use { res ->
                 if (res.code == 404) {
@@ -90,7 +90,7 @@ class Updates(private val core: Core) {
     }
 
     companion object {
-        private const val REPO = "InukaAsith/TwinDesk"
+        private const val REPO = "akundummy16081991-byte/ZoldDesk"
         private const val API = "https://api.github.com/repos/$REPO/releases/latest"
         const val RELEASES = "https://github.com/$REPO/releases"
         private const val FIRST_DELAY = 15_000L
@@ -118,7 +118,7 @@ class Updates(private val core: Core) {
             return x.pre.compareTo(y.pre)
         }
 
-        // TwinDesk-2.0.0-full.apk for the full build; the other .apk (TwinDesk-2.0.0.apk) for the standard one.
+        // ZoldDesk-2.0.0-full.apk for the full build; the other .apk (ZoldDesk-2.0.0.apk) for the standard one.
         private fun pickApk(assets: org.json.JSONArray?, full: Boolean): Apk? {
             if (assets == null) return null
             for (i in 0 until assets.length()) {

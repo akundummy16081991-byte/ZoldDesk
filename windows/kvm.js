@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Shared cursor and keyboard: state machine, Windows side, both roles
 // (this PC drives the Mac, or the Mac drives this PC).
 const P = require('../shared/protocol.js');
@@ -80,7 +80,7 @@ class Kvm {
       this.applyConfig();
       // A restarted helper has lost its state: nothing is captured or armed any more.
       if (this.mode === 'driving') this._release('');
-      else if (this.mode === 'driven') this._drivenHome('TwinDesk’s helper restarted', true);
+      else if (this.mode === 'driven') this._drivenHome('ZoldDesk’s helper restarted', true);
     });
     helper.on('event', (name, msg) => this._onHelper(name, msg));
   }

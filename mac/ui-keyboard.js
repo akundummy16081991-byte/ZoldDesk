@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Keyboard tab: keyboard sharing switch, the hotkey (double-tap = mouse and keyboard back here),
 // keyboard-only switching with the hotkey, Ctrl <-> Cmd mapping (only between a Mac and a PC).
 'use strict';
@@ -45,7 +45,7 @@ UI.tab({
       shortcutsRow.hidden = p.same;
       swapRow.hidden = p.same;
       swap.set(s.keys && s.keys.swapCtrlCmd);
-      otherHotkey.setHint(`Set in TwinDesk on ${p.name}`);
+      otherHotkey.setHint(`Set in ZoldDesk on ${p.name}`);
     };
   },
 });

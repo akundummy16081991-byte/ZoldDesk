@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // General tab (same cards as the PC's): open at login, the switching popup, firewall self-check
 // (+ Fix), wake from the network, the desktop session and input access (Wayland), the
 // helper, Bluetooth for devices not on this network, this computer and Quit (some desktops have
@@ -59,7 +59,7 @@ UI.tab({
       UI.card('Network and sharing', [wakeRow, bleRow, blePcRow, bleWifiRow, keepRow]),
       UI.card('This computer', [deviceRow, sessRow, inRow, helperRow]),
       UI.card('Quit', [
-        UI.row('Quit TwinDesk', 'Stops sharing until you open it again', [UI.button('Quit', () => api.quit(), 'small')]),
+        UI.row('Quit ZoldDesk', 'Stops sharing until you open it again', [UI.button('Quit', () => api.quit(), 'small')]),
       ], { cls: 'keep-on' }),
     );
 

@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Linux checks for Setup and General: the desktop session, input access on Wayland
 // (/dev/uinput writable and /dev/input readable, through a udev rule and the `input`
 // group) and the firewall (ufw or firewalld must let 47800/tcp and 47801/udp in). Fixes ask for
@@ -34,15 +34,15 @@ function session() {
 async function checkFirewall(fixed) {
   const ufw = await run('systemctl', ['is-active', 'ufw']);
   if (ufw.out === 'active') {
-    return fixed ? { ok: true, tool: 'ufw', message: 'ufw lets TwinDesk in' }
-      : { ok: false, tool: 'ufw', message: 'ufw is on and may block TwinDesk.' };
+    return fixed ? { ok: true, tool: 'ufw', message: 'ufw lets ZoldDesk in' }
+      : { ok: false, tool: 'ufw', message: 'ufw is on and may block ZoldDesk.' };
   }
   const fwd = await run('firewall-cmd', ['--state']);
   if (fwd.out === 'running') {
     const tcp = await run('firewall-cmd', ['--query-port=' + PORTS.tcp + '/tcp']);
     const udp = await run('firewall-cmd', ['--query-port=' + PORTS.udp + '/udp']);
     const ok = tcp.out === 'yes' && udp.out === 'yes';
-    return { ok, tool: 'firewalld', message: ok ? 'firewalld lets TwinDesk in' : 'firewalld blocks TwinDesk.' };
+    return { ok, tool: 'firewalld', message: ok ? 'firewalld lets ZoldDesk in' : 'firewalld blocks ZoldDesk.' };
   }
   return { ok: true, tool: '', message: 'No firewall is on' };
 }

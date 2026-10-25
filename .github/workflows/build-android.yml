@@ -52,14 +52,14 @@ jobs:
           ./gradlew --no-daemon assembleRelease
           v=$(grep -m1 versionName app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')
           mkdir -p dist
-          cp app/build/outputs/apk/standard/release/app-standard-release.apk "dist/TwinDesk-$v.apk"
-          cp app/build/outputs/apk/full/release/app-full-release.apk "dist/TwinDesk-$v-full.apk"
+          cp app/build/outputs/apk/standard/release/app-standard-release.apk "dist/ZoldDesk-$v.apk"
+          cp app/build/outputs/apk/full/release/app-full-release.apk "dist/ZoldDesk-$v-full.apk"
 
       - name: Upload APKs
         uses: actions/upload-artifact@v4
         with:
-          name: twindesk-android
-          path: android/dist/TwinDesk-*.apk
+          name: zolddesk-android
+          path: android/dist/ZoldDesk-*.apk
 
       # Straight onto the release, no download and re-upload.
       - name: Upload to the release
@@ -68,4 +68,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release view "${{ inputs.tag }}" >/dev/null 2>&1 || gh release create "${{ inputs.tag }}" --draft --target main --title "${{ inputs.tag }}" --notes "" || true
-          gh release upload "${{ inputs.tag }}" android/dist/TwinDesk-*.apk --clobber
+          gh release upload "${{ inputs.tag }}" android/dist/ZoldDesk-*.apk --clobber

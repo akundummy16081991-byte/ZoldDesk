@@ -1,6 +1,6 @@
 #!/bin/sh
-# TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
-# Builds dist/TwinDesk.app (npm run dist [x64|arm64]). The app code keeps its dev layout inside
+# ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+# Builds dist/ZoldDesk.app (npm run dist [x64|arm64]). The app code keeps its dev layout inside
 # Contents/Resources/app (mac/, shared/, mac-helper/.build/release/) so every `../` path still works;
 # no asar, because mac-helper and scripts/*.sh are run straight from there.
 set -e
@@ -19,7 +19,7 @@ EV=$(node -p "require('./node_modules/electron/package.json').version")
 
 ../mac-helper/build.sh "$ARCH"
 
-# TwinDesk for Android with notification access, which the Mac installs on a phone over wireless
+# ZoldDesk for Android with notification access, which the Mac installs on a phone over wireless
 # debugging (phone-bridge.js): the newest full build from android/dist, if one was built.
 FULL_APK=$(ls "$ROOT"/android/dist/*-full.apk 2>/dev/null | sort | tail -1)
 if [ -n "$FULL_APK" ]; then cp "$FULL_APK" vendor/twindesk-android-full.apk; else echo "note: no android/dist/*-full.apk — the app won't offer the full Android build"; fi
@@ -42,37 +42,37 @@ require('fs').writeFileSync('$STAGE/package.json', JSON.stringify({
   license: p.license, main: 'mac/main.js', dependencies: p.dependencies,
 }, null, 2));"
 
-# App icon: the TwinDesk dark icon (shared/icon, drawn by make-icon.py).
-cp "$ROOT/shared/icon/teindesk-dark.icns" dist/TwinDesk.icns
+# App icon: the ZoldDesk dark icon (shared/icon, drawn by make-icon.py).
+cp "$ROOT/shared/icon/teindesk-dark.icns" dist/ZoldDesk.icns
 
 cat > dist/extra.plist <<'EOF'
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
-  <key>NSLocalNetworkUsageDescription</key><string>TwinDesk finds and connects to your PC on the local network.</string>
-  <key>NSMicrophoneUsageDescription</key><string>TwinDesk sends sound between your Mac and your PC.</string>
-  <key>NSAudioCaptureUsageDescription</key><string>TwinDesk sends your Mac's sound to your PC.</string>
-  <key>NSCameraUsageDescription</key><string>TwinDesk does not use the camera.</string>
-  <key>NSBluetoothAlwaysUsageDescription</key><string>TwinDesk connects to your phone and computers over Bluetooth when they aren't on your network.</string>
-  <key>NSLocationUsageDescription</key><string>macOS shows Wi-Fi networks only to apps with Location. TwinDesk joins your phone's or PC's Wi-Fi to send files when they aren't on your network.</string>
-  <key>NSLocationWhenInUseUsageDescription</key><string>macOS shows Wi-Fi networks only to apps with Location. TwinDesk joins your phone's or PC's Wi-Fi to send files when they aren't on your network.</string>
-  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key><string>macOS shows Wi-Fi networks only to apps with Location. TwinDesk joins your phone's or PC's Wi-Fi to send files when they aren't on your network.</string>
-  <key>CFBundleURLTypes</key><array><dict><key>CFBundleURLName</key><string>TwinDesk</string><key>CFBundleURLSchemes</key><array><string>macshare</string></array></dict></array>
+  <key>NSLocalNetworkUsageDescription</key><string>ZoldDesk finds and connects to your PC on the local network.</string>
+  <key>NSMicrophoneUsageDescription</key><string>ZoldDesk sends sound between your Mac and your PC.</string>
+  <key>NSAudioCaptureUsageDescription</key><string>ZoldDesk sends your Mac's sound to your PC.</string>
+  <key>NSCameraUsageDescription</key><string>ZoldDesk does not use the camera.</string>
+  <key>NSBluetoothAlwaysUsageDescription</key><string>ZoldDesk connects to your phone and computers over Bluetooth when they aren't on your network.</string>
+  <key>NSLocationUsageDescription</key><string>macOS shows Wi-Fi networks only to apps with Location. ZoldDesk joins your phone's or PC's Wi-Fi to send files when they aren't on your network.</string>
+  <key>NSLocationWhenInUseUsageDescription</key><string>macOS shows Wi-Fi networks only to apps with Location. ZoldDesk joins your phone's or PC's Wi-Fi to send files when they aren't on your network.</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key><string>macOS shows Wi-Fi networks only to apps with Location. ZoldDesk joins your phone's or PC's Wi-Fi to send files when they aren't on your network.</string>
+  <key>CFBundleURLTypes</key><array><dict><key>CFBundleURLName</key><string>ZoldDesk</string><key>CFBundleURLSchemes</key><array><string>macshare</string></array></dict></array>
   <key>LSApplicationCategoryType</key><string>public.app-category.utilities</string>
   <key>NSHumanReadableCopyright</key><string>Copyright (C) 2026 inukaasith. GPL-3.0.</string>
 </dict></plist>
 EOF
 
-./node_modules/.bin/electron-packager "$STAGE" TwinDesk \
+./node_modules/.bin/electron-packager "$STAGE" ZoldDesk \
   --platform=darwin --arch="$ARCH" --electron-version="$EV" \
   --app-bundle-id=org.macshare.mac --app-version="$(node -p "require('./package.json').version")" \
-  --icon=dist/TwinDesk.icns --extend-info=dist/extra.plist \
+  --icon=dist/ZoldDesk.icns --extend-info=dist/extra.plist \
   --no-prune --asar=false --out=dist --overwrite --quiet
 
-APP="dist/TwinDesk-darwin-$ARCH/TwinDesk.app"
-rm -rf dist/TwinDesk.app && mv "$APP" dist/ && rm -rf "dist/TwinDesk-darwin-$ARCH" "$STAGE" dist/extra.plist
+APP="dist/ZoldDesk-darwin-$ARCH/ZoldDesk.app"
+rm -rf dist/ZoldDesk.app && mv "$APP" dist/ && rm -rf "dist/ZoldDesk-darwin-$ARCH" "$STAGE" dist/extra.plist
 # The Share menu extension (mac-helper/Sources/macshare-share), sandboxed as macOS requires.
-APPEX=dist/TwinDesk.app/Contents/PlugIns/MacShareShare.appex
+APPEX=dist/ZoldDesk.app/Contents/PlugIns/MacShareShare.appex
 VER="$(node -p "require('./package.json').version")"
 mkdir -p "$APPEX/Contents/MacOS"
 cp "$ROOT/mac-helper/.build/release/macshare-share" "$APPEX/Contents/MacOS/MacShareShare"
@@ -81,8 +81,8 @@ cat > "$APPEX/Contents/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0"><dict>
   <key>CFBundleIdentifier</key><string>org.macshare.mac.share</string>
-  <key>CFBundleName</key><string>TwinDesk</string>
-  <key>CFBundleDisplayName</key><string>TwinDesk</string>
+  <key>CFBundleName</key><string>ZoldDesk</string>
+  <key>CFBundleDisplayName</key><string>ZoldDesk</string>
   <key>CFBundleExecutable</key><string>MacShareShare</string>
   <key>CFBundlePackageType</key><string>XPC!</string>
   <key>CFBundleShortVersionString</key><string>$VER</string>
@@ -110,13 +110,13 @@ cat > dist/share.entitlements <<'PLIST'
 PLIST
 
 # One signature over the whole bundle (helpers first), so the edited Info.plist is sealed. With
-# TwinDesk's own certificate (scripts/signing-identity.sh) macOS keeps its permissions across
+# ZoldDesk's own certificate (scripts/signing-identity.sh) macOS keeps its permissions across
 # updates; ad-hoc (no certificate made) works, but each update asks for them again.
 if KC=$(scripts/signing-identity.sh); then SIGN="--keychain $KC --sign"; ID="TwinDesk Self-Signed"
 else echo "note: signing ad-hoc: permissions won't carry over to the next update"; SIGN="--sign"; ID="-"; fi
-for b in dist/TwinDesk.app/Contents/Resources/app/mac-helper/.build/release/*; do codesign --force $SIGN "$ID" "$b"; done
-codesign --force --deep $SIGN "$ID" dist/TwinDesk.app
+for b in dist/ZoldDesk.app/Contents/Resources/app/mac-helper/.build/release/*; do codesign --force $SIGN "$ID" "$b"; done
+codesign --force --deep $SIGN "$ID" dist/ZoldDesk.app
 codesign --force $SIGN "$ID" --entitlements dist/share.entitlements "$APPEX" # --deep dropped its sandbox
-codesign --force $SIGN "$ID" dist/TwinDesk.app && rm -f dist/share.entitlements
-codesign -dr - dist/TwinDesk.app 2>&1 | grep designated
-echo "built mac/dist/TwinDesk.app"
+codesign --force $SIGN "$ID" dist/ZoldDesk.app && rm -f dist/share.entitlements
+codesign -dr - dist/ZoldDesk.app 2>&1 | grep designated
+echo "built mac/dist/ZoldDesk.app"

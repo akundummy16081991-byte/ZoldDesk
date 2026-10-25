@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // The Mac's pointer on the phone's screen. While the Mac's mouse is over here, the Mac injects the
 // mouse through wireless debugging at positions it keeps itself (so it knows when the pointer
 // reaches the edge to go back), and tells us where it is (`phone.pointer {on, x, y}`, physical
@@ -57,7 +57,7 @@ class Pointer(core: Core) : Feature(core) {
             ).apply {
                 gravity = Gravity.TOP or Gravity.START
                 layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS
-                title = "TwinDesk pointer"
+                title = "ZoldDesk pointer"
             }
             lp = p
             runCatching { wm.addView(nv, p) }.onFailure { return }

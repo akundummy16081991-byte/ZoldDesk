@@ -69,16 +69,16 @@ jobs:
       - name: Upload the x64 installer
         uses: actions/upload-artifact@v4
         with:
-          name: twindesk-windows-x64
+          name: zolddesk-windows-x64
           path: |
             windows/dist/*.exe
             !windows/dist/*-arm64.exe
-            android/dist/TwinDesk-*.apk
+            android/dist/ZoldDesk-*.apk
 
       - name: Upload the arm64 installer
         uses: actions/upload-artifact@v4
         with:
-          name: twindesk-windows-arm64
+          name: zolddesk-windows-arm64
           path: windows/dist/*-arm64.exe
 
       # Straight onto the release, no download and re-upload.

@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Network drives: mount the PC's share when it offers one, and share
 // one folder of this Mac with the PC (admin setup once via scripts/smb-share.sh).
 // The share password is kept encrypted with Electron safeStorage (Keychain-backed) in settings.
@@ -182,7 +182,7 @@ class Smb extends EventEmitter {
     if (this.cfg.sharing && pw) this.server.sendToClient({ t: P.T.SMB_OFFER, share: 'MacShare', user: 'macshare', password: pw, port: 445 });
   }
 
-  // One switch: share the chosen folder, or ~/TwinDesk (created if missing).
+  // One switch: share the chosen folder, or ~/ZoldDesk (created if missing).
   async startSharing(folder) {
     folder = folder || this.cfg.folder || DEFAULT_FOLDER;
     if (this.share.busy) return;
@@ -193,7 +193,7 @@ class Smb extends EventEmitter {
     const pwFile = path.join(os.tmpdir(), `macshare-${crypto.randomBytes(6).toString('hex')}`);
     fs.writeFileSync(pwFile, pw, { mode: 0o600 });
     try {
-      await runScript('smb-share.sh', [folder, pwFile], 'TwinDesk wants to share a folder with the other computer.');
+      await runScript('smb-share.sh', [folder, pwFile], 'ZoldDesk wants to share a folder with the other computer.');
       const c = this.cfg;
       c.sharing = true;
       c.folder = folder;
@@ -215,7 +215,7 @@ class Smb extends EventEmitter {
     this.share = { busy: true, error: null, peer: null };
     this.emit('change');
     try {
-      await runScript('smb-unshare.sh', [c.folder], 'TwinDesk wants to stop sharing the folder.');
+      await runScript('smb-unshare.sh', [c.folder], 'ZoldDesk wants to stop sharing the folder.');
       this.server.sendToClient({ t: P.T.SMB_REVOKE, share: 'MacShare' });
       c.sharing = false;
       c.secret = '';

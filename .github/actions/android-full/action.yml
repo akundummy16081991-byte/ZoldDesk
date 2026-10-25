@@ -33,6 +33,6 @@ runs:
         ./gradlew --no-daemon assembleRelease
         v=$(grep -m1 versionName app/build.gradle.kts | sed 's/.*"\(.*\)".*/\1/')
         mkdir -p dist
-        cp app/build/outputs/apk/standard/release/app-standard-release.apk "dist/TwinDesk-$v.apk"
-        cp app/build/outputs/apk/full/release/app-full-release.apk "dist/TwinDesk-$v-full.apk"
+        cp app/build/outputs/apk/standard/release/app-standard-release.apk "dist/ZoldDesk-$v.apk"
+        cp app/build/outputs/apk/full/release/app-full-release.apk "dist/ZoldDesk-$v-full.apk"
         ls -la dist

@@ -1,5 +1,5 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
-// The app's window, laid out like TwinDesk on the Mac: a sidebar with the TwinDesk logo and the
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// The app's window, laid out like ZoldDesk on the Mac: a sidebar with the ZoldDesk logo and the
 // pages in the Mac's groups (Display, Input, Share, More, then General and About), each page a
 // heading with its main switch over cards of rows. On a phone held upright the sidebar becomes
 // tabs along the bottom (the rest under More). The building blocks are in Ui.kt.
@@ -257,14 +257,14 @@ fun App(core: Core, resumed: Int) {
     }
 }
 
-// The top of the sidebar: the logo, TwinDesk, and who is connected (the Mac's `.identity`).
+// The top of the sidebar: the logo, ZoldDesk, and who is connected (the Mac's `.identity`).
 @Composable
 private fun Identity(core: Core, v: Int, logo: Int) {
     @Suppress("UNUSED_EXPRESSION") v // redraw on every Core change (Compose skips unread parameters)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Logo(logo)
         Column(Modifier.padding(start = 12.dp)) {
-            Text("TwinDesk", fontWeight = FontWeight.Bold, fontSize = 19.sp, color = pal.text)
+            Text("ZoldDesk", fontWeight = FontWeight.Bold, fontSize = 19.sp, color = pal.text)
             Row(verticalAlignment = Alignment.CenterVertically) {
                 val h = core.host
                 Dot(when { h != null -> pal.good; core.link.pair != null || core.link.state == "connecting" -> pal.warn; else -> pal.faint }, 7)
@@ -369,7 +369,7 @@ private fun OverviewPage(core: Core, v: Int) {
     val host = core.host
     val me = core.store.deviceName
     val ip = remember(v) { core.adb.address() } // this phone's Wi-Fi address, for pairing by address on the computer
-    if (LocalConfiguration.current.screenWidthDp >= 600) PageHead("TwinDesk", listOf(me, ip).filter { it.isNotEmpty() }.joinToString(" · "))
+    if (LocalConfiguration.current.screenWidthDp >= 600) PageHead("ZoldDesk", listOf(me, ip).filter { it.isNotEmpty() }.joinToString(" · "))
     else PageHead(me, listOf("This device", ip).filter { it.isNotEmpty() }.joinToString(" · "))
 
     core.invite?.let { inv ->
@@ -507,7 +507,7 @@ private fun OverviewPage(core: Core, v: Int) {
                 SwitchRow("Sound", soundHint(core), core.sync.get("audio", "out"), first = true) { core.sync.set("audio", "out", it) }
                 SoundStart(core)
                 SwitchRow("Clipboard", "", core.sync.get("clipboard", "out")) { core.sync.set("clipboard", "out", it) }
-                SwitchRow("Notifications", if (core.notifs.hasAccess) "" else if (!core.notifs.supported) "Needs TwinDesk with notifications (Notifications page)" else "Needs Notification access (General)", core.sync.get("notifs", "out")) { core.sync.set("notifs", "out", it) }
+                SwitchRow("Notifications", if (core.notifs.hasAccess) "" else if (!core.notifs.supported) "Needs ZoldDesk with notifications (Notifications page)" else "Needs Notification access (General)", core.sync.get("notifs", "out")) { core.sync.set("notifs", "out", it) }
                 // Calls, Messages and Photos, when the computer has them: what each needs is asked for as it's switched on.
                 if (core.hub.peer) for (what in listOf("calls", "messages", "media", "files")) {
                     val perm = core.hub.perm(what)
@@ -516,7 +516,7 @@ private fun OverviewPage(core: Core, v: Int) {
                         Hub.label(what),
                         when {
                             perm == "none" && what == "files" -> "Needs Android 11 or later"
-                            perm == "none" -> "Needs TwinDesk with notifications (Notifications page)"
+                            perm == "none" -> "Needs ZoldDesk with notifications (Notifications page)"
                             on && perm == "ask" && what == "files" -> "Allow All files access: switch it on again"
                             on && perm == "ask" -> "Tap Allow on the prompt, or switch it on again"
                             on && perm == "partial" && what == "media" -> "Only the photos you chose"
@@ -554,7 +554,7 @@ private fun OverviewPage(core: Core, v: Int) {
             MacRow(f.name, "${if (f.os == "mac") "Mac" else if (f.os == "linux") "Linux" else "PC"} · ${if (f.address.startsWith("ble:") || f.address.startsWith("blp:")) "Bluetooth" else f.address}", first) { Secondary("Pair") { core.pair(f) } }
             first = false
         }
-        if (first) MacRow("Looking for computers…", if (core.bleOn && core.ble.allowed()) "Open TwinDesk on your computer (same Wi-Fi, or Bluetooth on)" else "Open TwinDesk on your Mac (same Wi-Fi)", true)
+        if (first) MacRow("Looking for computers…", if (core.bleOn && core.ble.allowed()) "Open ZoldDesk on your computer (same Wi-Fi, or Bluetooth on)" else "Open ZoldDesk on your Mac (same Wi-Fi)", true)
         BleSwitch(core, "Allow Nearby devices on the General page")
         var addr by remember { mutableStateOf("") }
         Box(Modifier.padding(start = 16.dp).fillMaxWidth().height(1.dp).background(pal.line))
@@ -638,15 +638,15 @@ private fun HubHead(core: Core, v: Int, what: String, title: String, desc: Strin
         if (it && perm != "ok") hub.askHere(what)
     }
     if (core.host == null) { NotConnected(core, v); return false }
-    if (!hub.peer) { Note("TwinDesk on $name needs to be up to date for $title.", "warn"); return false }
+    if (!hub.peer) { Note("ZoldDesk on $name needs to be up to date for $title.", "warn"); return false }
     when {
         perm == "none" && what == "files" -> Note("File access needs Android 11 or later. Mount on $name works through ADB instead.", "warn")
-        perm == "none" -> Note("$title needs TwinDesk with notifications: Android doesn’t let downloaded apps read texts. $name installs it once wireless debugging is set up (its Phone page › Install). Your settings and pairing stay.", "warn")
+        perm == "none" -> Note("$title needs ZoldDesk with notifications: Android doesn’t let downloaded apps read texts. $name installs it once wireless debugging is set up (its Phone page › Install). Your settings and pairing stay.", "warn")
         !on -> Note("Off. Switch it on here or on $name.")
         perm == "ask" -> {
             Note(
                 when (what) {
-                    "files" -> "Allow All files access, so $name can browse this phone’s storage. TwinDesk reads and writes the files itself: no ADB."
+                    "files" -> "Allow All files access, so $name can browse this phone’s storage. ZoldDesk reads and writes the files itself: no ADB."
                     "media" -> "Allow photos and videos, so $name can show them."
                     else -> "Allow what $title needs: ${Hub.wanted(what).size} permissions, asked for once."
                 },
@@ -672,7 +672,7 @@ private fun CallsPage(core: Core, v: Int) {
         MacRow("Make calls", "The number pad, contacts and recent calls on $name’s Calls page")
     }
     // The computer as this phone's headset: paired over classic Bluetooth by the person, in Bluetooth
-    // settings (TwinDesk doesn't pair them itself). Forget at the bottom.
+    // settings (ZoldDesk doesn't pair them itself). Forget at the bottom.
     val hub = core.hub
     if (hub.btAudio) MacCard("Sound on $name") {
         val bt = hub.btState()
@@ -681,14 +681,14 @@ private fun CallsPage(core: Core, v: Int) {
         MacRow(
             "Bluetooth",
             when {
-                !allowed -> "Allow Nearby devices so TwinDesk sees this phone’s pairing with $name"
+                !allowed -> "Allow Nearby devices so ZoldDesk sees this phone’s pairing with $name"
                 !bt.optBoolean("radio", true) -> "Bluetooth is off on this phone"
                 bt.optBoolean("bonding") -> "Pairing… Confirm the code here and on $name"
                 bt.optBoolean("forget") -> "Forget $name in Bluetooth settings here (Android keeps the old pairing for itself), then pair them again there"
                 bonded -> "Paired with $name: calls can play there"
                 bt.optBoolean("le") -> "Paired over Bluetooth LE only, which can’t carry a call: Forget, then pair them again in Bluetooth settings"
                 !hub.btKnown -> "Waiting for $name…"
-                else -> "Not paired with $name over classic Bluetooth: pair them in Bluetooth settings (here: Pair new device, or Add device on $name). TwinDesk connects once they are"
+                else -> "Not paired with $name over classic Bluetooth: pair them in Bluetooth settings (here: Pair new device, or Add device on $name). ZoldDesk connects once they are"
             },
             first = true,
         ) {
@@ -729,7 +729,7 @@ private fun FileAccessPage(core: Core, v: Int) {
     WifiGate(core, "Phone Files on $name")
     if (HubHead(core, v, "files", "File access", "Browse this phone’s storage on ${them(core)}, and copy files both ways.")) MacCard("On $name") {
         MacRow("Phone Files", "Folders, Save to $name, Upload, New folder, Rename, Delete", first = true)
-        MacRow("No ADB", "TwinDesk reads and writes the files itself with All files access. Mount on $name is the ADB way")
+        MacRow("No ADB", "ZoldDesk reads and writes the files itself with All files access. Mount on $name is the ADB way")
         MacRow("Where", "On USB, Wi-Fi or Wi-Fi Direct. Over Bluetooth $name says so, with Connect with Wi-Fi Direct")
     }
     if (core.host != null) SharedFolders(core, v)
@@ -865,9 +865,9 @@ private fun CursorPage(core: Core, v: Int) {
     val adbMissing = !viaPhone && !adbOn
     Note(
         when {
-            viaPhone && !core.input.supported -> "This build of TwinDesk can’t use Accessibility: Android’s Play Protect blocks downloaded apps that can. " +
-                "Use wireless debugging, or once it’s set up, $name installs TwinDesk with notifications, which can (on $name, Phone page › Install)."
-            viaPhone && !core.input.on -> "Allow TwinDesk in Accessibility, so $name’s pointer can tap and type here."
+            viaPhone && !core.input.supported -> "This build of ZoldDesk can’t use Accessibility: Android’s Play Protect blocks downloaded apps that can. " +
+                "Use wireless debugging, or once it’s set up, $name installs ZoldDesk with notifications, which can (on $name, Phone page › Install)."
+            viaPhone && !core.input.on -> "Allow ZoldDesk in Accessibility, so $name’s pointer can tap and type here."
             adbMissing -> "$name moves the pointer here through wireless debugging, which is off. Or choose Accessibility below."
             !core.pointer.allowed -> "Allow “Show the pointer” in General › Setup to see $name’s pointer here."
             !core.kvm.linked -> "Cursor sharing is off. Double-tap ${core.kvm.hotkey} on $name to turn it on."
@@ -891,7 +891,7 @@ private fun CursorPage(core: Core, v: Int) {
         MacRow("Through", when {
             core.input.via == "auto" && core.input.effective == "adb" -> "Automatic: ADB, wireless debugging is on"
             core.input.via == "auto" -> "Automatic: Accessibility until wireless debugging is on"
-            core.input.via == "phone" -> "Accessibility: TwinDesk taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth. No developer options"
+            core.input.via == "phone" -> "Accessibility: ZoldDesk taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth. No developer options"
             else -> "ADB (wireless debugging): full control. Over Bluetooth without it, Accessibility"
         }) {
             SingleChoiceSegmentedButtonRow {
@@ -935,7 +935,7 @@ private fun KeyboardPage(core: Core, v: Int) {
     if (host == null) return NotConnected(core, v)
     Note(if (on) "$name’s keyboard types here while its pointer is here." else "Keyboard sharing is off: only the pointer comes here.")
     MacCard("Hotkey") {
-        MacRow(core.kvm.hotkey, "Double-tap on $name to turn cursor sharing on or off. Set it in TwinDesk on $name", first = true)
+        MacRow(core.kvm.hotkey, "Double-tap on $name to turn cursor sharing on or off. Set it in ZoldDesk on $name", first = true)
     }
     MacCard {
         DirHead(name, false, me, true)
@@ -963,13 +963,13 @@ private fun ClipboardPage(core: Core, v: Int) {
     }
     MacCard {
         DirHead(me, true, name, false)
-        SwitchRow("Copies here go to $name", "While TwinDesk is open, or always with wireless debugging", core.sync.get("clipboard", "out"), first = true) { core.sync.set("clipboard", "out", it) }
+        SwitchRow("Copies here go to $name", "While ZoldDesk is open, or always with wireless debugging", core.sync.get("clipboard", "out"), first = true) { core.sync.set("clipboard", "out", it) }
         if (core.host != null) MacRow("Send the clipboard now", "Also: the Send clipboard tile in Quick Settings") { Secondary("Send") { core.clip.sendCurrent(true) } }
     }
     if (core.clip.history.isNotEmpty()) MacCard("Recent") {
         core.clip.history.toList().take(12).forEachIndexed { i, (dir, text) ->
             MacRow(text.replace('\n', ' ').take(120), if (dir == "in") "From $name · tap to copy" else "To $name · tap to copy", first = i == 0, onClick = {
-                ctx.getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText("TwinDesk", text))
+                ctx.getSystemService(ClipboardManager::class.java).setPrimaryClip(ClipData.newPlainText("ZoldDesk", text))
             })
         }
     }
@@ -986,8 +986,8 @@ private fun NotificationsPage(core: Core, v: Int) {
     PageHead("Notifications", "See each other’s notifications.")
     if (core.host == null) NotConnected(core, v)
     if (!core.notifs.supported) Note(
-        "This build of TwinDesk can’t read this device’s notifications: Android’s Play Protect blocks downloaded apps that can. " +
-            "$name installs TwinDesk with notifications for you once wireless debugging is set up: on $name, Phone page › Install. Your settings and pairing stay.",
+        "This build of ZoldDesk can’t read this device’s notifications: Android’s Play Protect blocks downloaded apps that can. " +
+            "$name installs ZoldDesk with notifications for you once wireless debugging is set up: on $name, Phone page › Install. Your settings and pairing stay.",
         "warn",
     )
     else if (!core.notifs.hasAccess) Note("Allow Notification access so this device’s notifications can go to $name.", "warn")
@@ -1058,7 +1058,7 @@ private fun FilesPage(core: Core, v: Int) {
         ) { Text(if (over) "Drop to send to $name" else "Drag files here to send them to $name", color = pal.muted) }
     }
     MacCard("From $name") {
-        MacRow("Drag across the edge", "Files dragged onto this device land in Downloads › TwinDesk", first = true)
+        MacRow("Drag across the edge", "Files dragged onto this device land in Downloads › ZoldDesk", first = true)
         MacRow("⌃⌥C on $name", "This device offers to copy them to its clipboard or save them")
         MacRow("Drop on the phone window", "Files dropped on this device’s window on $name come here")
     }
@@ -1106,7 +1106,7 @@ private fun SoundPage(core: Core, v: Int) {
 private fun soundHint(core: Core) = when {
     core.sound.on -> "Playing there (captured here: Stop in the notification)"
     core.sound.error.isNotEmpty() -> core.sound.error
-    else -> "Through wireless debugging, else TwinDesk captures it (Start, each time)"
+    else -> "Through wireless debugging, else ZoldDesk captures it (Start, each time)"
 }
 
 // The computer is waiting for the capture: Start here, as in the notification.
@@ -1153,7 +1153,7 @@ private fun GeneralPage(core: Core, v: Int) {
     // Every permission and feature in one place: each is asked for only when switched on elsewhere,
     // or here.
     MacCard("Allow") {
-        if (Build.VERSION.SDK_INT >= 33) Setup("Notifications", "Files arriving, invites from $name, and TwinDesk staying connected",
+        if (Build.VERSION.SDK_INT >= 33) Setup("Notifications", "Files arriving, invites from $name, and ZoldDesk staying connected",
             ctx.checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) == android.content.pm.PackageManager.PERMISSION_GRANTED, "Allow") {
             askNotify.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
@@ -1165,12 +1165,12 @@ private fun GeneralPage(core: Core, v: Int) {
             "files" to "This device’s storage and shared folders on $name, no ADB",
         )) {
             val perm = core.hub.perm(what)
-            if (perm == "none") MacRow(Hub.label(what), if (what == "files") "Needs Android 11 or later" else "Needs TwinDesk with notifications ($name installs it)")
+            if (perm == "none") MacRow(Hub.label(what), if (what == "files") "Needs Android 11 or later" else "Needs ZoldDesk with notifications ($name installs it)")
             else Setup(Hub.label(what), if (perm == "partial") "Some access is missing: $hint" else hint, perm == "ok", "Allow") { core.hub.askHere(what) }
         }
         if (core.notifs.supported) Setup("Notification access", "To show this device’s notifications on $name", core.notifs.hasAccess, "Allow") {
             ctx.startActivity(Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS))
-        } else MacRow("Notification access", "Comes with TwinDesk with notifications, which $name installs (its Phone page)")
+        } else MacRow("Notification access", "Comes with ZoldDesk with notifications, which $name installs (its Phone page)")
         Setup("Run in the background", "So $name can reach this device any time", pm.isIgnoringBatteryOptimizations(ctx.packageName), "Allow") {
             @Suppress("BatteryLife")
             ctx.startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:${ctx.packageName}")))
@@ -1196,7 +1196,7 @@ private fun GeneralPage(core: Core, v: Int) {
             askNearby.launch(nearbyPerms)
         }
         if (core.input.supported) Setup("Mouse and keyboard", "Accessibility: $name’s cursor on this phone without wireless debugging, on any network. Only needed when ADB isn’t used", core.input.on, "Allow") { core.input.openSettings() }
-        else MacRow("Mouse and keyboard", "Through wireless debugging. Without it: comes with TwinDesk with notifications, which $name installs (its Phone page)")
+        else MacRow("Mouse and keyboard", "Through wireless debugging. Without it: comes with ZoldDesk with notifications, which $name installs (its Phone page)")
         Setup("Show the pointer", "Draws $name’s pointer over other apps", core.pointer.allowed, "Allow") {
             ctx.startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${ctx.packageName}")))
         }
@@ -1234,7 +1234,7 @@ private fun AboutPage(core: Core, v: Int) {
     @Suppress("UNUSED_EXPRESSION") v // redraw on every Core change (Compose skips unread parameters)
     Column(Modifier.fillMaxWidth().padding(top = 24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
         Logo(110)
-        Text("TwinDesk", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = pal.text, modifier = Modifier.padding(top = 10.dp))
+        Text("ZoldDesk", fontSize = 28.sp, fontWeight = FontWeight.Bold, color = pal.text, modifier = Modifier.padding(top = 10.dp))
         Text("Version ${BuildConfig.VERSION_NAME}", color = pal.muted)
         Text("Use your computer and this device as one desk.", color = pal.muted, modifier = Modifier.padding(top = 6.dp, bottom = 20.dp))
     }
@@ -1243,7 +1243,7 @@ private fun AboutPage(core: Core, v: Int) {
     val u = core.updates
     MacCard("Updates") {
         MacRow(
-            "TwinDesk",
+            "ZoldDesk",
             when {
                 u.checking -> "Checking…"
                 u.error.isNotEmpty() -> "Couldn’t check: ${u.error}"
@@ -1261,12 +1261,12 @@ private fun AboutPage(core: Core, v: Int) {
     }
     MacCard("Made by") {
         MacRow("Inuka Asith", "inukaasith.vercel.app", first = true) { Secondary("Portfolio") { open("https://inukaasith.vercel.app") } }
-        MacRow("Source code", "github.com/InukaAsith/TwinDesk") { Secondary("GitHub") { open("https://github.com/InukaAsith/TwinDesk") } }
-        MacRow("Releases", "New versions for every platform") { Secondary("Open") { open("https://github.com/InukaAsith/TwinDesk/releases") } }
+        MacRow("Source code", "github.com/akundummy16081991-byte/ZoldDesk") { Secondary("GitHub") { open("https://github.com/akundummy16081991-byte/ZoldDesk") } }
+        MacRow("Releases", "New versions for every platform") { Secondary("Open") { open("https://github.com/akundummy16081991-byte/ZoldDesk/releases") } }
     }
     MacCard("License") {
         MacRow("GNU General Public License v3", "Free and open source. Copyright © 2026 inukaasith", first = true) {
-            Secondary("Read") { open("https://github.com/InukaAsith/TwinDesk/blob/main/LICENSE") }
+            Secondary("Read") { open("https://github.com/akundummy16081991-byte/ZoldDesk/blob/main/LICENSE") }
         }
         MacRow("Screen, input and sound over wireless debugging", "scrcpy-server (Apache-2.0)")
         MacRow("Network", "OkHttp (Apache-2.0)")

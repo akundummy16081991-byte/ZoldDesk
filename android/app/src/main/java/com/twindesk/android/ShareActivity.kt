@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // The share sheet's two targets, "Send to computer" and "Copy to computer" (the activity alias),
 // and the see-through activity that reads the clipboard for a moment (Android lets only the app in
 // front read it) for the Quick Settings tile and the notification's "Send clipboard".
@@ -19,7 +19,7 @@ class ShareActivity : Activity() {
         val copy = intent.component?.className?.endsWith("CopyToComputer") == true
         val host = core.host
         if (host == null) {
-            toast("Not connected. Open TwinDesk to connect to your computer.")
+            toast("Not connected. Open ZoldDesk to connect to your computer.")
             return finish()
         }
         val uris = mutableListOf<Uri>()

@@ -1,5 +1,5 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
-// The building blocks of the app's window, drawn like TwinDesk on the Mac (mac/control.css):
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// The building blocks of the app's window, drawn like ZoldDesk on the Mac (mac/control.css):
 // the same colours in light and dark, a sidebar of coloured icon tiles in groups, cards of rows
 // (label and hint on the left, the control on the right), page headings with one main switch,
 // the direction cards ("Mac → Tablet") and the layout picker.
@@ -132,7 +132,7 @@ fun Tile(icon: ImageVector, colors: List<Color>, size: Int = 26) {
 }
 
 @Composable
-fun Logo(size: Int) = Image(painterResource(R.drawable.twindesk_logo), "TwinDesk", Modifier.size(size.dp))
+fun Logo(size: Int) = Image(painterResource(R.drawable.twindesk_logo), "ZoldDesk", Modifier.size(size.dp))
 
 @Composable
 fun Dot(color: Color, size: Int = 8) = Box(Modifier.size(size.dp).clip(CircleShape).background(color))

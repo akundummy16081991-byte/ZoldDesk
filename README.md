@@ -1,8 +1,8 @@
 <p align="center">
-  <img src=".github/assets/icon.png" width="112" alt="TwinDesk icon">
+  <img src=".github/assets/icon.png" width="112" alt="ZoldDesk icon">
 </p>
 
-<h1 align="center"><a href="https://twin-desk.vercel.app">TwinDesk</a></h1>
+<h1 align="center"><a href="https://github.com/akundummy16081991-byte/ZoldDesk">ZoldDesk</a></h1>
 
 <p align="center">
   <b>All your computers and your phone, working as one desk.</b><br>
@@ -11,14 +11,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/InukaAsith/TwinDesk/releases/latest"><b>⬇️ Download 2.2</b></a> ·
-  <a href="https://twin-desk.vercel.app"><b>Website</b></a> ·
+  <a href="INSTALL.md"><b>Install from source</b></a> ·
+  <a href="https://github.com/akundummy16081991-byte/ZoldDesk/actions"><b>Build packages</b></a> ·
   <a href="#-new-in-22"><b>What's new</b></a> ·
   <a href="#under-the-hood"><b>How it works</b></a>
 </p>
 
 <p align="center">
-  <img alt="Version 2.2" src="https://img.shields.io/github/v/release/InukaAsith/TwinDesk?label=version&color=4b8bff">
+  <img alt="Version 2.2.0" src="https://img.shields.io/badge/version-2.2.0-4b8bff">
   <img alt="macOS 13+" src="https://img.shields.io/badge/macOS-13%2B-black">
   <img alt="Windows 10/11" src="https://img.shields.io/badge/Windows-10%20%7C%2011-0078d4">
   <img alt="Linux X11 and Wayland" src="https://img.shields.io/badge/Linux-X11%20%7C%20Wayland-f0a30a">
@@ -27,16 +27,18 @@
 </p>
 
 <p align="center">
-  <img src=".github/assets/hero.jpg" alt="One Mac's extended screen in a window on another Mac, the Mac's desktop extended onto a tablet, and TwinDesk on a phone" width="100%">
+  <img src=".github/assets/hero.jpg" alt="One Mac's extended screen in a window on another Mac, the Mac's desktop extended onto a tablet, and ZoldDesk on a phone" width="100%">
 </p>
 
-Your devices are good at their own jobs and bad at working together. TwinDesk fixes that.
+> **ZoldDesk is a personal fork of [InukaAsith/TwinDesk](https://github.com/InukaAsith/TwinDesk).** The application and package names are changed, while the protocol and internal compatibility identifiers stay intact. For agent-ready CachyOS and Apple Silicon instructions, use **[INSTALL.md](INSTALL.md)**.
+
+Your devices are good at their own jobs and bad at working together. ZoldDesk fixes that.
 Put a **Mac and a Windows PC** side by side and use them with one mouse and keyboard. Open the
 PC's apps on the Mac. Turn an old laptop or your **Android tablet** into a second screen. Answer
 your **phone's calls and texts** from the computer, send a file in two taps, and paste on one
 device what you copied on another.
 
-- **Any combination.** Mac ↔ Windows, Mac ↔ Mac, PC ↔ PC, Linux ↔ anything, and Android ↔ any computer. Or, with **TwinDesk Mesh**, all of them at once.
+- **Any combination.** Mac ↔ Windows, Mac ↔ Mac, PC ↔ PC, Linux ↔ anything, and Android ↔ any computer. Or, with **ZoldDesk Mesh**, all of them at once.
 - **Anywhere.** Same Wi-Fi, a USB cable, or no shared network at all: Bluetooth and a direct Wi-Fi link of their own.
 - **No account, no cloud.** Devices talk only to each other, on an encrypted link.
 - **No extra hardware, no root.** Install the app on each device and pair once.
@@ -69,10 +71,10 @@ Phone screen and apps in windows · tablet as a second screen · **calls** · **
 # ✨ New in 2.2
 
 <p align="center">
-  <img src=".github/assets/v22-mesh.jpg" alt="Introducing TwinDesk Mesh: a MacBook, a Windows PC, a Linux laptop, a phone and a tablet, all connected to each other" width="100%">
+  <img src=".github/assets/v22-mesh.jpg" alt="Introducing ZoldDesk Mesh: a MacBook, a Windows PC, a Linux laptop, a phone and a tablet, all connected to each other" width="100%">
 </p>
 
-Meet **TwinDesk Mesh**. Your laptop, your desktop, the Linux box in the corner, your phone and your
+Meet **ZoldDesk Mesh**. Your laptop, your desktop, the Linux box in the corner, your phone and your
 tablet, all connected at once. Copy on one and paste on any of them. A text on your phone shows up
 on every screen. Glide your mouse from screen to screen to screen. However many devices are on your
 desk, they now work as one.
@@ -86,12 +88,12 @@ desk, they now work as one.
 | 🤝 | **Pair once, join all.** A new device meets the rest by itself | [More](#-introducing-twindesk-mesh) |
 | ✨ | **Every feature introduces itself.** Each tab shows what it does with an animated picture, until you turn it on | |
 
-TwinDesk Mesh is built on the work of **Erdoğan Yeşil ([@erdodo](https://github.com/erdodo))**
+ZoldDesk Mesh is built on the work of **Erdoğan Yeşil ([@erdodo](https://github.com/erdodo))**
 in [#29](https://github.com/InukaAsith/TwinDesk/pull/29). Thank you! 🙌
 
-## 🕸 Introducing TwinDesk Mesh
+## 🕸 Introducing ZoldDesk Mesh
 
-Until now TwinDesk paired two devices at a time. Mesh connects **all of them**: every computer and
+Until now ZoldDesk paired two devices at a time. Mesh connects **all of them**: every computer and
 phone you own, each talking straight to the others, no cloud and no hub in between. Your phone no
 longer has to choose between your two computers.
 
@@ -118,9 +120,9 @@ wherever you sit.
 
 ## 🧪 Try the beta
 
-TwinDesk Mesh is in **beta** on Windows, Mac and Linux. Turn it on in the **Multi-device** tab;
-TwinDesk restarts, and your pairings come with it. Turn it off any time and everything is just as
-you left it. Devices that don't have it on (or run an older TwinDesk) still connect as before.
+ZoldDesk Mesh is in **beta** on Windows, Mac and Linux. Turn it on in the **Multi-device** tab;
+ZoldDesk restarts, and your pairings come with it. Turn it off any time and everything is just as
+you left it. Devices that don't have it on (or run an older ZoldDesk) still connect as before.
 
 Connecting just two devices? Keep it off, you won't need it. A few things are still being polished:
 files dragged across a screen edge go to one device at a time, the phone app connects to one
@@ -129,10 +131,10 @@ computer at a time, and Linux joins other computers over the same Wi-Fi only.
 # ✨ New in 2.1
 
 <p align="center">
-  <img src=".github/assets/v21-whats-new.jpg" alt="TwinDesk 2.1: the Overview over Bluetooth and the Calls page with an incoming call" width="100%">
+  <img src=".github/assets/v21-whats-new.jpg" alt="ZoldDesk 2.1: the Overview over Bluetooth and the Calls page with an incoming call" width="100%">
 </p>
 
-TwinDesk 2.1 is the biggest update yet. Devices no longer need to be on the same network, and the
+ZoldDesk 2.1 is the biggest update yet. Devices no longer need to be on the same network, and the
 phone is now on your computer in full: its calls, texts, photos and files.
 
 | | What's new | |
@@ -169,7 +171,7 @@ and brings it back when that Wi-Fi goes.
 ## ⚡ Wi-Fi Direct and hotspot
 
 Bluetooth is great for the session but too slow for a screen or a big file. So when you start one,
-TwinDesk **brings up a direct Wi-Fi link** between the two devices for as long as it's needed, then
+ZoldDesk **brings up a direct Wi-Fi link** between the two devices for as long as it's needed, then
 goes back to Bluetooth (*Temporary Wi-Fi Direct*). Want it to stay? Press **Connect with Wi-Fi
 Direct** on either side, and **Back to Bluetooth** when you're done. A phone can also share its
 **hotspot**: the computer joins it, with the name and password typed once and remembered.
@@ -184,7 +186,7 @@ Direct** on either side, and **Back to Bluetooth** when you're done. A phone can
   <img src=".github/assets/v21-connections.jpg" alt="Same Wi-Fi, Bluetooth LE, Wi-Fi Direct, phone hotspot and USB cable" width="100%">
 </p>
 
-You never have to choose. TwinDesk uses the same network when there is one, moves a phone onto
+You never have to choose. ZoldDesk uses the same network when there is one, moves a phone onto
 the **USB cable** when you plug it in (and back when you unplug), and falls back to Bluetooth when
 the Wi-Fi goes. The link and its latency are always shown at the top of the app.
 
@@ -266,7 +268,7 @@ shared by both sides and remembered for the pair.
 Pair as many computers and phones as you like. **Switch** moves the session to another paired
 device nearby, **Take over** claims one that's busy with someone else, and **Disconnect** lets go:
 a device let go stays away until you connect it again. All from the Overview, the menu bar or the
-tray. Want them all connected at once? Try [TwinDesk Mesh](#-introducing-twindesk-mesh).
+tray. Want them all connected at once? Try [ZoldDesk Mesh](#-introducing-twindesk-mesh).
 
 ## 🤝 Cross-platform pairing
 
@@ -283,7 +285,7 @@ a Windows PC, with the PC's apps ready to open on the Mac:
 
 # 📱 Phone and tablet features
 
-Most phone links stop at notifications and a file drop. In TwinDesk your Android phone or tablet is
+Most phone links stop at notifications and a file drop. In ZoldDesk your Android phone or tablet is
 a **full peer**: it pairs like a computer and gets the same features, plus its calls, texts, photos
 and files.
 
@@ -312,7 +314,7 @@ ones as they arrive, and a count in the sidebar. Start a new conversation by num
 Browse the phone's **photos and videos** on **Photos** (all, photos, videos or screenshots), open
 any of them big, and save one or many to the computer. **Phone Files** browses the phone's whole
 storage: open folders, save to the computer, upload, rename, delete and make folders, or just drop
-files on the page. It's TwinDesk on the phone doing it, so no developer options are needed.
+files on the page. It's ZoldDesk on the phone doing it, so no developer options are needed.
 
 **Shared folders work both ways:** a folder the phone shares opens in **Finder, Explorer or the
 Linux file manager**, and a folder you share from the computer shows up in the phone's **Files app
@@ -379,7 +381,7 @@ works in the background, and a Quick Settings tile sends the phone's clipboard w
 Push the pointer past the edge of your screen and it **carries on onto the phone**. Type with your
 real keyboard in any Android app, scroll with your trackpad, then double-tap the hotkey to come back.
 It goes through wireless debugging, or through **Accessibility** with no developer options at all
-(over Bluetooth too, in the full app, which the computer installs for you); TwinDesk picks
+(over Bluetooth too, in the full app, which the computer installs for you); ZoldDesk picks
 automatically, or you choose on the Cursor page.
 
 <p align="center">
@@ -439,28 +441,28 @@ in both directions (the phone captures its own sound now, no wireless debugging 
 | PC ↔ PC | Everything |
 | Linux ↔ Mac, PC or Linux | Everything ([a few differences](#linux)) |
 | Android ↔ Mac, Windows or Linux | Every phone and tablet feature |
-| All of them at once | One clipboard, notifications and screen layout for every device ([TwinDesk Mesh, beta](#-introducing-twindesk-mesh)) |
+| All of them at once | One clipboard, notifications and screen layout for every device ([ZoldDesk Mesh, beta](#-introducing-twindesk-mesh)) |
 
 Every pair connects over the same Wi-Fi, Bluetooth, or a direct Wi-Fi link; a phone also over a USB cable.
 
 <p align="center">
-  <img src=".github/assets/tour.gif" alt="A tour of the TwinDesk window" width="820">
+  <img src=".github/assets/tour.gif" alt="A tour of the ZoldDesk window" width="820">
 </p>
 
 ## Get started
 
-1. **Download** TwinDesk for each computer and your phone from the [releases](https://github.com/InukaAsith/TwinDesk/releases/latest).
+1. **Install or build** ZoldDesk for each computer and your phone using [INSTALL.md](INSTALL.md), or download artifacts produced by this repository's [Actions](https://github.com/akundummy16081991-byte/ZoldDesk/actions).
 2. **Open it on both.** They find each other on the same network, over Bluetooth, or over a USB cable for a phone.
 3. **Pair once** by comparing a code (on a USB cable, just click Allow). From then on they connect by themselves.
 
-For the phone's screen and apps in windows, TwinDesk walks you through turning on Android's
+For the phone's screen and apps in windows, ZoldDesk walks you through turning on Android's
 wireless debugging once ([details](#wireless-debugging)). Files, clipboard, the computer's notifications,
 calls and photos work without it. The phone's notifications, texts and mouse and keyboard through
 Accessibility come with the full app, which the computer installs once over wireless debugging.
 
 ## Privacy
 
-TwinDesk only talks to devices you've paired with, directly over your own network, Bluetooth, a
+ZoldDesk only talks to devices you've paired with, directly over your own network, Bluetooth, a
 direct Wi-Fi link or a cable. There are no accounts, no telemetry and no cloud relay. Your calls,
 texts and photos go straight from the phone to your computer and nowhere else. The only internet
 request is an update check against GitHub's public releases, which you can turn off.
@@ -471,11 +473,11 @@ request is an update check against GitHub's public releases, which you can turn 
 
 # Under the hood
 
-Everything below is for the curious and for people building TwinDesk themselves.
+Everything below is for the curious and for people building ZoldDesk themselves.
 
 ## Linux
 
-On Linux, TwinDesk runs on both X11 and Wayland. On Wayland, the mouse and keyboard go through
+On Linux, ZoldDesk runs on both X11 and Wayland. On Wayland, the mouse and keyboard go through
 evdev and uinput (the Setup screen grants access once), and screens are captured through the
 desktop portal. A few things work a little differently:
 
@@ -492,7 +494,7 @@ desktop portal. A few things work a little differently:
 - **Extend.** On GNOME (Wayland) it uses Mutter's own virtual monitor; pick "Virtual remote
   monitor" when the desktop asks which screen to share. On X11 it switches on a spare output of
   the graphics driver (not available on NVIDIA's driver). That needs a small helper, which the
-  .deb installs; with the AppImage, Share screen › *TwinDesk virtual display* › Install puts it in
+  .deb installs; with the AppImage, Share screen › *ZoldDesk virtual display* › Install puts it in
   once, with your password.
 - **Apps.** Opening this computer's apps on the other side needs an Xorg session.
 - **Bluetooth and Wi-Fi Direct.** Bluetooth LE goes through BlueZ, and direct Wi-Fi links through
@@ -505,7 +507,7 @@ desktop portal. A few things work a little differently:
 
 ## Android in detail
 
-Install TwinDesk on the phone, open it next to TwinDesk on the computer and pair from Overview › Nearby. The phone needs Android 10, and Android 11 for everything that goes through wireless debugging.
+Install ZoldDesk on the phone, open it next to ZoldDesk on the computer and pair from Overview › Nearby. The phone needs Android 10, and Android 11 for everything that goes through wireless debugging.
 
 ### The phone app
 
@@ -522,7 +524,7 @@ every page names the computer it's connected to:
 | **Notifications** | The phone's notifications on the computer, with the text hidden if you like, and the computer's on the phone |
 | **Files** | Send files, copy them to paste on the computer, and see where the computer's files land |
 | **Sound** | The phone's sound on the computer, and the computer's sound on the phone |
-| **General** | The phone's name, background running, and the permissions TwinDesk uses, each with its switch |
+| **General** | The phone's name, background running, and the permissions ZoldDesk uses, each with its switch |
 | **About** | Source code, releases, the license, and what goes over wireless debugging and the network |
 
 And outside the app:
@@ -541,7 +543,7 @@ And outside the app:
 
 Files, the clipboard and notifications work right away. The phone's screen, its apps in windows,
 touch, your mouse and keyboard on the phone and its sound go through **wireless debugging**, which
-TwinDesk pairs with once:
+ZoldDesk pairs with once:
 
 <p align="center">
   <img src=".github/assets/ui-phone-pair.jpg" alt="Overview: the wireless debugging card under the connected computers, with the pairing code" width="820">
@@ -550,18 +552,18 @@ TwinDesk pairs with once:
 - Until it's paired, a card under the connected computers on Overview (on the computer and on the
   phone) walks you through it. Open *Developer options › Wireless debugging › Pair device with
   pairing code* on the phone and type the 6-digit code on the computer, or on the phone in
-  TwinDesk's notification (Settings' dialog stays open). The phone sends the code to whichever
+  ZoldDesk's notification (Settings' dialog stays open). The phone sends the code to whichever
   computer it's connected to: Mac, PC or Linux.
-- After that TwinDesk switches wireless debugging on by itself when it needs it, follows it to its
+- After that ZoldDesk switches wireless debugging on by itself when it needs it, follows it to its
   new port every time it restarts, and keeps the pairing from expiring (Android otherwise forgets
   a computer after 7 days unused). Phones that switch it off on every Wi-Fi change or screen lock
   (MIUI, HyperOS) get it switched back on as soon as they're unlocked, or a prompt if they refuse.
-  Wireless debugging only runs while **USB debugging** is on too, so TwinDesk turns both on.
+  Wireless debugging only runs while **USB debugging** is on too, so ZoldDesk turns both on.
 - **Xiaomi, Redmi and POCO** also need *Developer options › USB debugging (Security settings)* for
   touch, mouse and keyboard (it asks for a Mi account). Without it the screen shows but input is
   refused; the computer's Phone page says "Touch blocked" until it's on.
 - **On a Mac, the phone in Finder.** Turn it on in the Mount tab and click Mount: the phone shows
-  under Locations like any server. Until then TwinDesk never looks at the phone's files. It goes
+  under Locations like any server. Until then ZoldDesk never looks at the phone's files. It goes
   through the cable when USB debugging is allowed, else over wireless debugging. Finder's `.DS_Store` and `._` files never land on the phone.
 
 ## How it works
@@ -586,27 +588,27 @@ capturing and injecting input, virtual displays, gestures, window capture and na
 | `shared/` | Used by every app: the wire protocol, the Bluetooth pipe and Wi-Fi Direct links, the phone hub (Calls, Messages, Photos, Phone Files), shared folders, frame generation and icons |
 
 The link between two devices is one TLS session wherever it runs: on the local network, through
-a phone's USB cable (adb), or through **Bluetooth LE** (a GATT pipe of TwinDesk's own,
+a phone's USB cable (adb), or through **Bluetooth LE** (a GATT pipe of ZoldDesk's own,
 `shared/blepipe.js`). When a session on Bluetooth needs bandwidth, `shared/netlink.js` brings up a
 **Wi-Fi Direct** group or joins a phone's hotspot, moves the session onto it, and takes it down
 again once nothing needs it. Calls, Messages, Photos and Phone Files are `shared/phonehub.js` on
-the computers, answered by TwinDesk on the phone.
+the computers, answered by ZoldDesk on the phone.
 
 Ports: TCP **47800** (control link) and UDP **47801** (discovery) on the local network.
 
 ## Build and run
 
-You need [Node.js](https://nodejs.org) 18+ on every platform.
+Use **Node.js 26** when possible; the locked Electron tooling requires Node.js **22.12 or newer**. Install dependencies with `npm ci`, not `npm install`. The [agent-ready installation guide](INSTALL.md) has complete CachyOS and Apple Silicon instructions, permission notes, and verification steps.
 
 ### macOS (13 Ventura or later)
 
 ```sh
-xcode-select --install          # Swift compiler for the helper
+xcode-select -p                 # if missing, run xcode-select --install and finish its dialog
 cd mac
-npm install
-npm run build:helper
+npm ci
+npm run build:helper            # Swift compiler from Xcode Command Line Tools
 npm start                       # run from source
-npm run dist && npm run dmg     # build TwinDesk.app and TwinDesk.dmg in mac/dist/
+npm run dist:arm64 && npm run dmg  # ZoldDesk.app and ZoldDesk.dmg in mac/dist/
 ```
 
 By default, `npm run dist` targets the Mac's current architecture. To build an Intel
@@ -617,26 +619,26 @@ npm run dist:x64 && npm run dmg
 ```
 
 To build the Intel app and produce the requested named image in one step, run
-`npm run dmg:intel`; it writes `mac/dist/Twindesk_intel.dmg`.
+`npm run dmg:intel`; it writes `mac/dist/ZoldDesk_intel.dmg`.
 
 Use `npm run dist:arm64 && npm run dmg` for Apple Silicon explicitly. The x64 build
 cross-compiles the Swift helpers and packages the x64 Electron runtime, so it does
 not require an Intel Mac.
 
-On first launch, TwinDesk asks for **Screen Recording**, **Accessibility** and **Input
+On first launch, ZoldDesk asks for **Screen Recording**, **Accessibility** and **Input
 Monitoring** (once; after that the General tab shows each permission's status).
 
 `npm run dist` signs the app with a certificate of its own, made the first time in
 `~/.twindesk-signing` (keep a backup). macOS keeps permissions per signature, so with the same
 certificate they carry over when an update is dragged into Applications. An app built without it is
-signed ad-hoc, and macOS treats every update as a new app; TwinDesk then clears the stale entries so
-Allow works again.
+signed ad-hoc, and macOS treats every update as a new app; ZoldDesk then clears the stale entries so
+Allow works again. Local and CI builds are not notarized by Apple; do not disable Gatekeeper.
 
 ### Windows 10 / 11
 
 ```bat
 cd windows
-npm install
+npm ci
 npm run build:helper            :: uses the .NET Framework C# compiler that ships with Windows
 npm start
 npm run dist                    :: NSIS installer in windows\dist\
@@ -653,26 +655,30 @@ Display Driver for Extend.
 
 ### Linux (X11 or Wayland)
 
+For Debian/Ubuntu:
+
 ```sh
 sudo apt install build-essential libx11-dev libxi-dev libxtst-dev libxrandr-dev libxfixes-dev
 cd linux
-npm install
+npm ci
 npm run build:helper
 npm start
 npm run dist                    # AppImage and .deb in linux/dist/
 ```
 
+For **CachyOS**, use the pacman dependencies and AppImage commands in [INSTALL.md](INSTALL.md#cachyos-arch-based-x86_64).
+
 The Setup screen walks you through the rest. On Wayland that means input access (one admin
 prompt, then log out and back in once). It can also install OpenSSH for the terminal. Extend on
-GNOME Wayland uses Python 3 with GObject and GStreamer's PipeWire plugin (`python3-gi`,
-`gstreamer1.0-pipewire`), which GNOME desktops already have.
+GNOME Wayland uses Python 3 with GObject and GStreamer's PipeWire plugin (`python3-gi` and
+`gstreamer1.0-pipewire` on Debian/Ubuntu; `python-gobject` and `gst-plugin-pipewire` on Arch).
 
 
 #### Testing the Linux app from a Mac
 
 `linux/scripts/vm-test.sh` runs it in a [Parallels Desktop](https://www.parallels.com) Linux VM
 (Ubuntu with the packages above and Node.js): it copies this checkout into the VM, builds the
-helper, starts TwinDesk in the VM's desktop session and drives it from the Mac.
+helper, starts ZoldDesk in the VM's desktop session and drives it from the Mac.
 
 ```sh
 linux/scripts/vm-test.sh start            # sync, build and (re)start it in the VM
@@ -681,7 +687,7 @@ linux/scripts/vm-test.sh eval "UI.go('cursor')"
 linux/scripts/vm-test.sh log
 ```
 
-On the VM's shared network it finds the Mac's TwinDesk and pairs like any Linux computer.
+On the VM's shared network it finds the Mac's ZoldDesk and pairs like any Linux computer.
 
 ### Android
 
@@ -697,12 +703,14 @@ Notifications from the phone), so `npm run dist` on each platform bundles the ne
 
 ### GitHub Actions
 
-**Build Android**, **Build Linux** and **Build Windows** (Actions tab › Run workflow) make the
-standard and full APKs, the AppImage and .deb, and the x64 and arm64 installers, helpers included.
-Set the `ANDROID_KEYSTORE` secret to the key the Android app is signed with
-(`base64 -i ~/.android/debug.keystore`): the APKs then install over existing ones, and the Linux and
-Windows builds carry the full Android app. Without it the APKs get the runner's own key and the
-computers' builds leave the Android app out.
+**Build Android**, **Build Linux**, **Build macOS**, and **Build Windows** (Actions tab › Run workflow)
+build the standard and full APKs, AppImage and .deb, Apple Silicon DMG, and x64 and arm64 installers.
+Every desktop workflow invokes `.github/actions/android-full`, which always builds both APK variants
+from source before packaging the desktop app.
+
+Set `ANDROID_KEYSTORE` to a base64-encoded keystore to keep one stable Android signature across runs
+and machines. Without it, Gradle uses the runner's local debug key: the APKs are still built and the
+desktop packages include the full APK, but they cannot update an installation signed with another key.
 
 To Authenticode-sign the Windows installers, set the `WIN_CSC_LINK` secret to a base64-encoded
 Windows code-signing `.pfx` certificate and `WIN_CSC_KEY_PASSWORD` to its password. Keep the
@@ -713,7 +721,7 @@ guarantee that antivirus products will stop flagging a file.
 
 ## Thanks
 
-TwinDesk Mesh (Multi-device) is built on the mesh by Erdoğan Yeşil ([@erdodo](https://github.com/erdodo), [#29](https://github.com/InukaAsith/TwinDesk/pull/29)),
+ZoldDesk Mesh (Multi-device) is built on the mesh by Erdoğan Yeşil ([@erdodo](https://github.com/erdodo), [#29](https://github.com/InukaAsith/TwinDesk/pull/29)),
 who also contributed [#8](https://github.com/InukaAsith/TwinDesk/pull/8) and [#9](https://github.com/InukaAsith/TwinDesk/pull/9).
 Thanks too to [@Jay-Prajapati01](https://github.com/Jay-Prajapati01) for signed Windows installers
 ([#13](https://github.com/InukaAsith/TwinDesk/pull/13)), and to everyone who reports problems and
@@ -721,7 +729,7 @@ shares ideas in the [issues](https://github.com/InukaAsith/TwinDesk/issues).
 
 ## License
 
-TwinDesk is free software, licensed under the [GNU General Public License v3.0](LICENSE).
+ZoldDesk is free software, licensed under the [GNU General Public License v3.0](LICENSE).
 Copyright © 2026 inukaasith.
 
 Parts are adapted from [DeskPad](https://github.com/Stengo/DeskPad) (MIT). See [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES)

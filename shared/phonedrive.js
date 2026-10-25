@@ -1,9 +1,9 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // An Android phone as a drive on the computer: a WebDAV server on 127.0.0.1 in front of the
 // phone's storage (/sdcard), reached through adb, which the system mounts as a network volume
 // (Finder on a Mac, a drive letter through Windows' WebClient, GVFS on Linux). Through the USB
 // cable when the phone allows USB debugging, else through wireless debugging (the network) while
-// the phone is connected to TwinDesk; it switches between the two as the cable comes and goes,
+// the phone is connected to ZoldDesk; it switches between the two as the cable comes and goes,
 // and unmounts when neither is there.
 //
 // Nothing runs until Mount is clicked on the Mount page: no polling, no adb, no server. It looks
@@ -132,8 +132,8 @@ class PhoneDrive extends EventEmitter {
     this.busy = '';
     if (!this._via()) {
       this.message = this.usb && this.usb.state === 'unauthorized' ? 'Allow USB debugging on the phone (the prompt on its screen), then Mount again.'
-        : this.usb ? 'Turn on USB debugging on the phone (Developer options), or connect it to TwinDesk with wireless debugging.'
-          : 'Plug the phone in with a USB cable (USB debugging on), or connect it to TwinDesk.';
+        : this.usb ? 'Turn on USB debugging on the phone (Developer options), or connect it to ZoldDesk with wireless debugging.'
+          : 'Plug the phone in with a USB cable (USB debugging on), or connect it to ZoldDesk.';
       return this.emit('change');
     }
     this._set('mounting', '');
@@ -324,7 +324,7 @@ class PhoneDrive extends EventEmitter {
       const auth = Buffer.from(String(req.headers.authorization || '').replace(/^Basic /, ''), 'base64').toString();
       if (auth !== `${this.user}:${this.password}`) {
         req.resume();
-        res.writeHead(401, { 'WWW-Authenticate': 'Basic realm="TwinDesk"', 'Content-Length': 0 });
+        res.writeHead(401, { 'WWW-Authenticate': 'Basic realm="ZoldDesk"', 'Content-Length': 0 });
         return res.end();
       }
     }

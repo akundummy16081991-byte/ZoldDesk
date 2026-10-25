@@ -1,7 +1,7 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // The wireless debugging steps, to let the computer show this screen and use its mouse and
 // keyboard here, each ticked off as it happens: a page from Overview's Set up and General › Setup.
-// The pairing code is typed in TwinDesk's notification (Settings' code dialog closes if you switch
+// The pairing code is typed in ZoldDesk's notification (Settings' code dialog closes if you switch
 // apps), or here when Settings is side by side; the phone sends it to the computer,
 // which pairs (adb.pair), and says how it went (adb.bridge).
 package com.twindesk.android
@@ -98,7 +98,7 @@ private fun WirelessSteps(core: Core, ctx: Context, title: String, foot: @Compos
     val connected = core.host != null
     class S(val title: String, val hint: String, val done: Boolean, val optional: Boolean = false, val action: @Composable () -> Unit = {})
     val steps = listOfNotNull(
-        S("Connect to $name", "Open TwinDesk on $name, then tap Connect on Overview.", connected) {
+        S("Connect to $name", "Open ZoldDesk on $name, then tap Connect on Overview.", connected) {
             core.hosts().firstOrNull()?.let { h -> Secondary("Connect") { core.connect(h) } }
         },
         S(
@@ -114,7 +114,7 @@ private fun WirelessSteps(core: Core, ctx: Context, title: String, foot: @Compos
         S("Turn on USB and Wireless debugging", "Developer options › USB debugging and Wireless debugging: both on.", a.wifiDebugging) { Secondary("Open") { a.turnOn() } },
         S(
             "Pair with $name",
-            if (a.pairing) "Pairing…" else "“Pair device with pairing code”, then type the code in TwinDesk’s notification.", a.paired,
+            if (a.pairing) "Pairing…" else "“Pair device with pairing code”, then type the code in ZoldDesk’s notification.", a.paired,
         ) { Primary("Pair") { a.askForCode(); a.openSettings() } },
     )
     val current = steps.indexOfFirst { !it.done && !it.optional }

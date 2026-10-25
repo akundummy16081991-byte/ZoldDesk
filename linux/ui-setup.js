@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Setup screen (same page as the PC's):
 // a full page before the tabs while something isn't ready: the desktop session, input access on
 // Wayland (Fix = uinput rule + the input group, one password prompt), the firewall (Fix
@@ -24,7 +24,7 @@ UI.setup = (() => {
 
   const page = el('section', { class: 'setup-page', hidden: true }, [
     el('div', { class: 'app-mark', attrs: { 'aria-hidden': 'true' } }),
-    el('h1', { text: 'Set up TwinDesk' }),
+    el('h1', { text: 'Set up ZoldDesk' }),
     el('p', { text: 'A few things before {me} can share with the other computer.' }),
     UI.card('', [sessRow, inRow, fwRow, helperRow]),
     el('div', { class: 'setup-foot' }, [
@@ -45,11 +45,11 @@ UI.setup = (() => {
     const ss = s.session || {};
     sessRow.hidden = !shown.has('session');
     sessPill.textContent = 'No desktop';
-    sessRow.setHint('No X11 or Wayland display found. Start TwinDesk from your desktop.');
+    sessRow.setHint('No X11 or Wayland display found. Start ZoldDesk from your desktop.');
 
     const inBad = s.setup.missing.includes('input');
     inRow.hidden = !shown.has('input');
-    inRow.setHint(ss.inputNote || (inBad ? 'Wayland lets TwinDesk share the mouse and keyboard through /dev/uinput and /dev/input. Fix sets that up once (asks for your password); then log out and back in.' : ''));
+    inRow.setHint(ss.inputNote || (inBad ? 'Wayland lets ZoldDesk share the mouse and keyboard through /dev/uinput and /dev/input. Fix sets that up once (asks for your password); then log out and back in.' : ''));
     inFix.hidden = !inBad;
     inDone.hidden = inBad;
 
@@ -63,7 +63,7 @@ UI.setup = (() => {
     const h = s.kvmState.helper;
     const helperBad = s.setup.missing.includes('helper');
     helperRow.hidden = !shown.has('helper');
-    helperRow.setHint(helperBad ? h + '. Restart TwinDesk if it stays like this.' : '');
+    helperRow.setHint(helperBad ? h + '. Restart ZoldDesk if it stays like this.' : '');
     helperPill.hidden = !helperBad;
     helperDone.hidden = helperBad;
   }

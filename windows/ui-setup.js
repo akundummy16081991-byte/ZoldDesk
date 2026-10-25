@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Setup screen: a full page before the
 // tabs while something isn't ready: firewall and network profile (Fix, one UAC prompt), the
 // mouse and keyboard helper, and the display driver for Extend (optional). "Skip for now" is
@@ -17,11 +17,11 @@ UI.setup = (() => {
   const helperRow = UI.row('Mouse and keyboard helper', '', [helperPill, helperDone]);
   const drvBtn = UI.button('Install', () => api.installVdd(), 'small');
   const drvDone = done();
-  const drvRow = UI.row('TwinDesk virtual display', '', [drvBtn, drvDone]);
+  const drvRow = UI.row('ZoldDesk virtual display', '', [drvBtn, drvDone]);
 
   const page = el('section', { class: 'setup-page', hidden: true }, [
     el('div', { class: 'app-mark', attrs: { 'aria-hidden': 'true' } }),
-    el('h1', { text: 'Set up TwinDesk' }),
+    el('h1', { text: 'Set up ZoldDesk' }),
     el('p', { text: 'A few things before {me} can share with the other computer.' }),
     UI.card('', [fwRow, helperRow, drvRow]),
     el('div', { class: 'setup-foot' }, [
@@ -49,7 +49,7 @@ UI.setup = (() => {
     const h = s.kvmState.helper;
     const helperBad = s.setup.missing.includes('helper');
     helperRow.hidden = !shown.has('helper');
-    helperRow.setHint(helperBad ? h + '. Restart TwinDesk if it stays like this.' : '');
+    helperRow.setHint(helperBad ? h + '. Restart ZoldDesk if it stays like this.' : '');
     helperPill.hidden = !helperBad;
     helperDone.hidden = helperBad;
 

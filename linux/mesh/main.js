@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
 // Main process (Linux) with Multi-device on (docs/multi-device.md): ../main.js starts this file instead
 // of its own code when multi.json says so. ../main.js over the mesh (hub.js) instead of one peer, as
 // windows/mesh/main.js is to windows/main.js; computers connect over the network only (no Bluetooth
@@ -77,7 +77,7 @@ if (!app.requestSingleInstanceLock()) {
   app.quit();
 } else {
   Menu.setApplicationMenu(null); // its accelerators would steal keys meant for the other computer
-  // Starting TwinDesk again shows the window (no tray on some desktops); a Mac app's launcher starts
+  // Starting ZoldDesk again shows the window (no tray on some desktops); a Mac app's launcher starts
   // "twindesk --mac-app=<id>": open that app instead; the file managers' Send to, --send-files.
   app.on('second-instance', (_e, argv) => {
     if (sendTo && sendTo.handle(argv)) return;
@@ -976,7 +976,7 @@ function createMainWindow() {
     y: b.y,
     minWidth: 720,
     minHeight: 480,
-    title: 'TwinDesk',
+    title: 'ZoldDesk',
     icon: path.join(__dirname, '..', 'assets', 'icon.png'),
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#2b2b2e' : '#e9e9ee',
     show: false,
@@ -1024,10 +1024,10 @@ function createTray() {
     img.addRepresentation({ scaleFactor: 2, buffer: nativeImage.createFromPath(path.join(__dirname, '..', 'assets', 'tray@2x.png')).toPNG() });
     tray = new Tray(img);
   } catch (e) {
-    console.error('[tray]', e.message); // no tray on this desktop: start TwinDesk again to show the window
+    console.error('[tray]', e.message); // no tray on this desktop: start ZoldDesk again to show the window
     return;
   }
-  tray.setToolTip('TwinDesk');
+  tray.setToolTip('ZoldDesk');
   tray.on('click', showMain);
   updateTray(buildState());
 }
@@ -1037,7 +1037,7 @@ function createTray() {
 let trayKey = '';
 function updateTray(s) {
   if (!tray) return;
-  tray.setToolTip('TwinDesk: ' + statusLine(s));
+  tray.setToolTip('ZoldDesk: ' + statusLine(s));
   const connected = s.link.state === 'connected';
   const name = connected && s.peer ? s.peer.name : '';
   const k = settings.kvm;
@@ -1086,9 +1086,9 @@ function updateTray(s) {
     ] },
     check('Show a Popup When Switching', settings.app.hud, (i) => set('app', { hud: i.checked })),
     { type: 'separator' },
-    ...(s.updates && s.updates.available ? [{ label: 'Download TwinDesk ' + s.updates.latest + '…', click: () => updates.open() }] : []),
-    { label: 'Open TwinDesk…', click: showMain },
-    { label: 'Quit TwinDesk', click: () => app.quit() },
+    ...(s.updates && s.updates.available ? [{ label: 'Download ZoldDesk ' + s.updates.latest + '…', click: () => updates.open() }] : []),
+    { label: 'Open ZoldDesk…', click: showMain },
+    { label: 'Quit ZoldDesk', click: () => app.quit() },
   ]));
 }
 

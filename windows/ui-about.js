@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // About tab (same cards on all three apps): the app icon and version, update checks, this
 // computer, the app's build, the maker and the licence. Facts come from shared/about.js.
 'use strict';
@@ -29,20 +29,20 @@ UI.tab({
       });
       return card;
     };
-    const nameEl = el('div', { class: 'about-name', text: 'TwinDesk' });
+    const nameEl = el('div', { class: 'about-name', text: 'ZoldDesk' });
     const verEl = el('div', { class: 'about-ver' });
     const hero = el('div', { class: 'card about-hero keep-on' }, [
-      el('div', { class: 'about-icon', attrs: { role: 'img', 'aria-label': 'TwinDesk icon' } }),
+      el('div', { class: 'about-icon', attrs: { role: 'img', 'aria-label': 'ZoldDesk icon' } }),
       nameEl,
       verEl,
       el('div', { class: 'about-tag', text: 'Use two computers as one desk' }),
     ]);
 
-    // Updates: new releases of TwinDesk on GitHub.
+    // Updates: new releases of ZoldDesk on GitHub.
     const updStatus = el('span', { class: 'value' });
     const updCheck = UI.button('Check now', () => api.checkUpdates(), 'small');
     const updGet = UI.button('Download', () => api.openUpdate(), 'small primary');
-    const updRow = UI.row('TwinDesk', '', [updStatus, updGet, updCheck]);
+    const updRow = UI.row('ZoldDesk', '', [updStatus, updGet, updCheck]);
     const updAuto = UI.switch((v) => api.setUpdates({ auto: v }), { label: 'Check for updates automatically' });
 
     const pc = facts('This computer', ['Computer name', 'System', 'Kernel', 'Processor', 'Memory', 'Architecture']);
@@ -59,7 +59,7 @@ UI.tab({
       build,
       UI.card('Made by', [
         UI.row('Inuka Asith', 'inukaasith.vercel.app', [link('Portfolio', 'portfolio')]),
-        UI.row('Source code', 'github.com/InukaAsith/TwinDesk', [link('GitHub', 'github')]),
+        UI.row('Source code', 'github.com/akundummy16081991-byte/ZoldDesk', [link('GitHub', 'github')]),
         UI.row('All releases', 'Downloads for macOS, Windows and Linux', [link('Releases', 'releases')]),
       ], { cls: 'keep-on' }),
       UI.card('Licence', [
@@ -70,7 +70,7 @@ UI.tab({
 
     return (s) => {
       const a = s.about || { app: {}, pc: {} };
-      nameEl.textContent = a.app.name || 'TwinDesk';
+      nameEl.textContent = a.app.name || 'ZoldDesk';
       verEl.textContent = 'Version ' + (a.app.version || s.version || '');
       thanksRow.setHint(a.app.thanks || '');
       thanksRow.hidden = !a.app.thanks;

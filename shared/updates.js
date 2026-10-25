@@ -1,5 +1,5 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
-// Update check for all three apps: asks GitHub for the latest release of TwinDesk, compares its
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// Update check for all three apps: asks GitHub for the latest release of ZoldDesk, compares its
 // tag with this app's version and picks the download for this platform and CPU. Nothing is
 // installed here; the app opens the download (or the release page) in the browser.
 //
@@ -8,7 +8,7 @@
 //   notify(title, body, onClick) once per new version; open() shows the download in the browser.
 'use strict';
 
-const REPO = 'InukaAsith/TwinDesk';
+const REPO = 'akundummy16081991-byte/ZoldDesk';
 const API = `https://api.github.com/repos/${REPO}/releases/latest`;
 const RELEASES = `https://github.com/${REPO}/releases`;
 const FIRST_DELAY = 15 * 1000;
@@ -115,7 +115,7 @@ class Updates {
     this._set({ checking: true, error: '' });
     try {
       const res = await this.fetch(API, {
-        headers: { Accept: 'application/vnd.github+json', 'User-Agent': `TwinDesk/${this.current}` },
+        headers: { Accept: 'application/vnd.github+json', 'User-Agent': `ZoldDesk/${this.current}` },
         cache: 'no-store',
       });
       if (res.status === 404) {
@@ -128,12 +128,12 @@ class Updates {
       if (!parse(latest)) throw new Error('The latest release has no version number');
       const available = compare(latest, this.current) > 0;
       const download = pickAsset(r.assets, this.platform, this.arch, this.prefer);
-      this._set({ checking: false, latest, name: String(r.name || `TwinDesk ${latest}`), available, download,
+      this._set({ checking: false, latest, name: String(r.name || `ZoldDesk ${latest}`), available, download,
         releaseUrl: r.html_url || RELEASES, noReleases: false, checkedAt: Date.now() });
       if (available && this.cfg.notified !== latest) {
         this.cfg.notified = latest;
         this.save();
-        this.notify(`TwinDesk ${latest} is available`, manual ? 'Click to download it.' : `You have ${this.current}. Click to download the new version.`, () => this.open());
+        this.notify(`ZoldDesk ${latest} is available`, manual ? 'Click to download it.' : `You have ${this.current}. Click to download the new version.`, () => this.open());
       }
     } catch (e) {
       this._set({ checking: false, error: manual ? (e && e.message) || 'Couldn’t reach GitHub' : '', checkedAt: this.status.checkedAt });

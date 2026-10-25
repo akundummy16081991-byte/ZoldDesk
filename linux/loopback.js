@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // This computer's sound as a capture device. Chromium lists no "Monitor of …" sources
 // (it hides them), so while something sends our sound we load a PulseAudio remap source over the
 // default output's monitor; PipeWire's pipewire-pulse does the same. The renderer picks it by its
@@ -8,7 +8,7 @@
 const { execFile } = require('child_process');
 
 const NAME = 'twindesk_sound';
-const LABEL = 'TwinDesk-Sound';
+const LABEL = 'ZoldDesk-Sound';
 
 const pactl = (args) => new Promise((resolve, reject) => {
   execFile('pactl', args, { timeout: 8000 }, (err, out, stderr) => {

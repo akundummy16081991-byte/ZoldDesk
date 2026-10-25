@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Share screen (copy of windows/ui-share.js): this computer's screen in a window on the
 // other computer, controlled from there. Mirror shows an existing monitor; Extend adds an extra
 // (virtual) screen (vdd.js: Mutter's on GNOME Wayland, a spare output on X11, which needs the
@@ -57,7 +57,7 @@ UI.tab({
     // X11: Extend's screen is a spare output switched on through a small root helper (vdd.js).
     const installBtn = UI.button('Install', () => api.installVdd(), 'small primary');
     const removeBtn = UI.button('Remove', () => api.removeVdd(), 'small');
-    const driver = UI.row('TwinDesk virtual display', '', [installBtn, removeBtn]);
+    const driver = UI.row('ZoldDesk virtual display', '', [installBtn, removeBtn]);
     const driverCard = UI.card('', [driver], { cls: 'keep-on' });
 
     body.append(

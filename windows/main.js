@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Main process: lifecycle, windows, tray, IPC and the state pushed to the main window.
 const { app, BrowserWindow, Tray, Menu, nativeImage, nativeTheme, Notification, shell } = require('electron');
 const { Updates } = require('../shared/updates.js');
@@ -62,7 +62,7 @@ app.commandLine.appendSwitch('disable-features', 'WebRtcHideLocalIpsWithMdns');
 // (jitterBufferTarget). FlexFEC repairs lost packets without a resend round trip; it costs bandwidth
 // only while packets are lost. The Mac sets the same trials.
 app.commandLine.appendSwitch('force-fieldtrials', 'WebRTC-ForceSendPlayoutDelay/min_ms:0,max_ms:0/WebRTC-FlexFEC-03/Enabled/WebRTC-FlexFEC-03-Advertised/Enabled/');
-// Renamed MacShare → TwinDesk: settings, pairing and keys stay in the folder they've always been
+// Renamed MacShare → ZoldDesk: settings, pairing and keys stay in the folder they've always been
 // in (Electron would follow the new product name). A dev copy's --user-data-dir still wins.
 if (!app.commandLine.hasSwitch('user-data-dir')) app.setPath('userData', path.join(app.getPath('appData'), 'MacShare'));
 // Multi-device switched on (multi.js, docs/multi-device.md): mesh/main.js runs instead of everything below.
@@ -72,7 +72,7 @@ if (!app.requestSingleInstanceLock()) {
 } else {
   Menu.setApplicationMenu(null); // its accelerators would steal keys meant for the Mac
   app.setAppUserModelId(AUMID); // toasts need it; the installer's shortcut carries the same id
-  // A pinned Mac app starts "TwinDesk.exe --mac-app=<id>": open it, else show the window.
+  // A pinned Mac app starts "ZoldDesk.exe --mac-app=<id>": open it, else show the window.
   app.on('second-instance', (_e, argv) => {
     if (sendTo && sendTo.handle(argv)) return; // Explorer › Send to
     if (!openMacAppArg(argv) && !openPhoneAppArg(argv)) showMain();
@@ -645,7 +645,7 @@ function openMacAppArg(argv) {
   return true;
 }
 
-// A pinned phone app starts "TwinDesk.exe --phone-app=<package>": open it once the phone's
+// A pinned phone app starts "ZoldDesk.exe --phone-app=<package>": open it once the phone's
 // wireless debugging is ready (connecting a paired phone nearby first, if none is connected).
 let pendingPhoneApp = null; // {pkg, until}
 let pendingView = null; // a phone window waiting for wireless debugging (phoneViews.onNoAdb)
@@ -662,7 +662,7 @@ function openPhoneApp(pkg) {
   const first = !pendingPhoneApp;
   pendingPhoneApp = { pkg, until: (pendingPhoneApp && pendingPhoneApp.until) || Date.now() + 2 * 60 * 1000 };
   if (first && hud) hud.show('home', 'Opening it when the phone is ready…');
-  // Until then, every 2 s: the phone may not be up (TwinDesk just started) or nearby yet.
+  // Until then, every 2 s: the phone may not be up (ZoldDesk just started) or nearby yet.
   clearTimeout(openPhoneApp.timer);
   if (Date.now() > pendingPhoneApp.until) return (pendingPhoneApp = null);
   if (phone && !phone.connected && !phone.connecting) {
@@ -872,7 +872,7 @@ function createMainWindow() {
     y: b.y,
     minWidth: 720,
     minHeight: 480,
-    title: 'TwinDesk',
+    title: 'ZoldDesk',
     icon: path.join(__dirname, 'assets', 'icon.png'),
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#2b2b2e' : '#e9e9ee',
     show: false,
@@ -934,7 +934,7 @@ function checkTaskbar() {
 
 function createTray() {
   tray = new Tray(trayIcon());
-  tray.setToolTip('TwinDesk');
+  tray.setToolTip('ZoldDesk');
   tray.on('click', showMain);
   checkTaskbar();
   updateTray();
@@ -949,7 +949,7 @@ function updateTray(s = buildState()) {
   const sharing = s.pcScreen.mode !== 'off';
   const found = s.found.filter((d) => !s.peer || d.id !== s.peer.id);
   const rtt = connected && s.link.rtt != null ? ' · ' + s.link.rtt + ' ms' : '';
-  tray.setToolTip('TwinDesk: ' + statusLine(s));
+  tray.setToolTip('ZoldDesk: ' + statusLine(s));
   // Rebuild only when something in the menu changed (state pushes are frequent).
   const watching = screen.sentAccept === true;
   const host = s.paired && s.paired.macName;
@@ -995,9 +995,9 @@ function updateTray(s = buildState()) {
     ...(again ? [{ label: (s.link.busy ? 'Take Over ' : 'Connect to ') + host, click: () => link.connect(true) }] : []),
     check('Show a Popup When Switching', settings.app.hud, (i) => set('app', { hud: i.checked })),
     { type: 'separator' },
-    ...(s.updates && s.updates.available ? [{ label: 'Download TwinDesk ' + s.updates.latest + '…', click: () => updates.open() }] : []),
-    { label: 'Open TwinDesk…', click: showMain },
-    { label: 'Quit TwinDesk', click: () => app.quit() },
+    ...(s.updates && s.updates.available ? [{ label: 'Download ZoldDesk ' + s.updates.latest + '…', click: () => updates.open() }] : []),
+    { label: 'Open ZoldDesk…', click: showMain },
+    { label: 'Quit ZoldDesk', click: () => app.quit() },
   ]));
 }
 

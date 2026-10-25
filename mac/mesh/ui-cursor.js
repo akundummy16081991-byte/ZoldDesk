@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
 // Cursor tab: directions, edge resistance, speed, scrolling. Which device each edge leads to is the
 // layout in the Multi-device tab (ui-multi.js, docs/mesh.md "Shared layout").
 'use strict';
@@ -37,7 +37,7 @@ UI.tab({
 
     // A phone as the peer: how the pointer and keys reach it (settings.phone.input, the phone's own toggle too).
     const via = UI.segmented([{ value: 'adb', label: 'ADB' }, { value: 'phone', label: 'Accessibility' }], (v) => api.setPhone({ input: v, inputPicked: true }));
-    const viaRow = UI.row('Through', 'ADB: full control. Accessibility: TwinDesk on the phone taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth, no developer options', [via.el]);
+    const viaRow = UI.row('Through', 'ADB: full control. Accessibility: ZoldDesk on the phone taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth, no developer options', [via.el]);
     let driven2 = null;
     body.append(
       status,

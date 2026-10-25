@@ -1,8 +1,8 @@
-// TwinDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
 // Everything this PC does to the phone through wireless debugging (adb.js + scrcpy.js), while a
 // phone is the peer:
 //   setup   find the phone's adb (mDNS), pair once with the code from Developer options, connect,
-//           then grant the TwinDesk app what it can't ask for itself (switching wireless debugging
+//           then grant the ZoldDesk app what it can't ask for itself (switching wireless debugging
 //           on by itself next time, notification access, the pointer overlay, background running).
 //   control one control-only scrcpy session: this PC's mouse and keyboard across the screen edge
 //           (Kvm drives the phone through us: kvm.take → we answer kvm.accept, inject the input at
@@ -41,7 +41,7 @@ function readJson(file, fallback) {
     return fallback;
   }
 }
-// TwinDesk for Android with notification access (the "full" build). People download the standard
+// ZoldDesk for Android with notification access (the "full" build). People download the standard
 // build (Play Protect blocks downloaded apps that read notifications); this one we install over it
 // through wireless debugging, which Play Protect doesn't check. In the app: vendor/ (installer/build.js
 // copies it there); from a checkout: the Android build's dist/.
@@ -322,7 +322,7 @@ class PhoneBridge extends EventEmitter {
     const justPaired = Date.now() - (this.pairedAt || 0) < 60000;
     this.pairing = justPaired ? null : services.find((s) => s.type === 'pairing' && s.address === address) || null;
     this.misses++;
-    // Paired before (this phone reached us since TwinDesk started): keep looking, with the code
+    // Paired before (this phone reached us since ZoldDesk started): keep looking, with the code
     // field there in case its pairing really was removed.
     if (unpaired) this._known(false);
     const known = !unpaired && this.known.has(this.server.current.deviceId);
@@ -455,7 +455,7 @@ class PhoneBridge extends EventEmitter {
     if (this.kvm) this._hover(); // taken while the connection was down: the pointer goes where it should be
   }
 
-  // The phone copied something (scrcpy sees it even with TwinDesk in the background): it goes
+  // The phone copied something (scrcpy sees it even with ZoldDesk in the background): it goes
   // through this PC's clipboard rules as if the app had sent it.
   _phoneCopied(text) {
     if (!text || typeof text !== 'string') return;
@@ -464,13 +464,13 @@ class PhoneBridge extends EventEmitter {
     this.server.inject({ t: T.CLIP, text });
   }
 
-  // Install the full build over the phone's TwinDesk: settings and pairing stay (same app, same
+  // Install the full build over the phone's ZoldDesk: settings and pairing stay (same app, same
   // signature). The app restarts, so we grant notification access, open it and invite it back.
   async installFull() {
     const apk = fullApk();
     const c = this.server.current;
     if (!this.serial || !isPhone(c)) return this._install('failed', 'Set up wireless debugging first.');
-    if (!apk) return this._install('failed', 'This build of TwinDesk doesn’t carry the Android app.');
+    if (!apk) return this._install('failed', 'This build of ZoldDesk doesn’t carry the Android app.');
     const id = c.deviceId;
     const serial = this.serial;
     this._install('installing', `Installing on ${c.name}…`);
@@ -575,7 +575,7 @@ class PhoneBridge extends EventEmitter {
       setImmediate(() => this.server.inject({ t: T.KVM_REFUSE, route: m.route, why: P.REFUSE.NOT_ALLOWED }));
       if (d && (this.viaPhone || (this.state !== 'ready' && this.inputMode !== 'adb'))) { // no wireless debugging (Bluetooth), or chosen: the phone does it itself, once allowed
         this.server.sendToClient({ t: T.PHONE_INPUT_ASK });
-        this.emit('popup', 'home', 'On the phone, allow TwinDesk to control it (the notification there)');
+        this.emit('popup', 'home', 'On the phone, allow ZoldDesk to control it (the notification there)');
       } else {
         this.emit('popup', 'home', this.state === 'ready' ? 'The phone isn’t ready yet' : 'Set up wireless debugging on the Phone page first');
       }

@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Terminal, this PC → the other computer (a Mac, another PC or Linux): an ed25519 key made once,
 // handed over the paired link (ssh.key); the other side's host keys come back (ssh.info) and are
 // pinned in our own known_hosts, so ssh never asks for a password or "trust this host?". A
@@ -113,7 +113,7 @@ class Terminal {
     if (this.status !== 'ready' || this.onBle) return;
     try { this._writeHost(); } catch (e) { return this._set('error', e.message); }
     const opts = { detached: true, stdio: 'ignore', windowsHide: false };
-    const title = (this.link.snapshot().link.macName || 'TwinDesk').replace(/["&|<>^]/g, '');
+    const title = (this.link.snapshot().link.macName || 'ZoldDesk').replace(/["&|<>^]/g, '');
     const wt = spawn('wt.exe', ['--title', title, SSH, SshConfig.ALIAS], opts);
     wt.on('error', () => spawn('cmd.exe', ['/c', 'start', '', SSH, SshConfig.ALIAS], { ...opts, shell: false }).unref());
     wt.unref();

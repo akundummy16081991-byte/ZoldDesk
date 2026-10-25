@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Portions adapted from Beamer (https://github.com/kalkman-code/beamer), Copyright (C) Kalkman Code,
 // GPL-3.0. Changed: JS port of win_app/firewall_win.py (status script + interpret), simplified to
 // one program rule and no ports.
@@ -33,8 +33,8 @@ function interpret(payload) {
   let message = 'OK';
   if (!lan.length) message = 'No network connection.';
   else if (publicNets.length) message = 'The network "' + publicNets[0].alias + '" is Public, so Windows blocks {name}’s broadcasts.';
-  else if (blocked) message = 'A Windows Firewall rule blocks TwinDesk.';
-  else if (!covered) message = 'TwinDesk isn’t allowed through Windows Firewall on this network.';
+  else if (blocked) message = 'A Windows Firewall rule blocks ZoldDesk.';
+  else if (!covered) message = 'ZoldDesk isn’t allowed through Windows Firewall on this network.';
   return { ok: lan.length > 0 && !publicNets.length && !blocked && covered, message, publicNets, blocked, covered, admin: payload.admin !== false, unread };
 }
 
@@ -47,7 +47,7 @@ async function check(exe = process.execPath) {
 }
 
 // One elevated PowerShell: make Public LAN interfaces Private, remove our block rules, add the allow rule.
-// The rules cover every profile, so a Public network works too (TwinDesk's link is TLS, pinned to
+// The rules cover every profile, so a Public network works too (ZoldDesk's link is TLS, pinned to
 // the pair, and a new pairing needs Allow on both sides); networks are still made Private when we
 // can, for the shared folder. Needs an administrator: a standard account's UAC prompt asks for an
 // admin's password, and declining it (or not having one) says so.
@@ -60,7 +60,7 @@ async function fix(status, exe = process.execPath) {
       Blocked: !!(status && status.blocked),
     });
   } catch (e) {
-    if (status && status.admin === false) throw new Error('it needs an administrator’s password. Ask someone with one to click Fix, or to reinstall TwinDesk (the installer adds the rule)');
+    if (status && status.admin === false) throw new Error('it needs an administrator’s password. Ask someone with one to click Fix, or to reinstall ZoldDesk (the installer adds the rule)');
     throw e;
   }
   return check(exe);

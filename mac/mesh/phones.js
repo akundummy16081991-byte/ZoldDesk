@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
 // Every phone this Mac drives (port of windows/phones.js; here a phone's link is a Peer over a hub route
 // bound to that phone's device id, and PhoneDir watches the hub for phones coming and going), each with a stack of its own: a Phone (what it says about itself),
 // a PhoneBridge (its adb connection, USB cable first, and its pointer while a computer's input drives
@@ -198,14 +198,14 @@ class PhoneSet extends EventEmitter {
     if (this.wired && this.wired.connect(id)) {
       const p = this.pairing.list().find((x) => x.id === id);
       clearTimeout(this.connecting && this.connecting.timer);
-      this.connecting = { id, name: p ? p.name : 'The phone', timer: setTimeout(() => this._doneConnecting(`${p ? p.name : 'The phone'} didn’t answer. Open TwinDesk on it.`), CONNECT_WAIT_MS) };
+      this.connecting = { id, name: p ? p.name : 'The phone', timer: setTimeout(() => this._doneConnecting(`${p ? p.name : 'The phone'} didn’t answer. Open ZoldDesk on it.`), CONNECT_WAIT_MS) };
       this.message = '';
       return this.emit('change');
     }
     const d = this.discovery.get(id);
     if (!d || d.os !== P.OS.ANDROID) return this._fail('That phone isn’t nearby any more.');
     clearTimeout(this.connecting && this.connecting.timer);
-    this.connecting = { id: d.id, name: d.name, timer: setTimeout(() => this._doneConnecting(`${d.name} didn’t answer. Open TwinDesk on it.`), CONNECT_WAIT_MS) };
+    this.connecting = { id: d.id, name: d.name, timer: setTimeout(() => this._doneConnecting(`${d.name} didn’t answer. Open ZoldDesk on it.`), CONNECT_WAIT_MS) };
     this.message = '';
     this.discovery.invite(d.address);
     setTimeout(() => this.connecting && this.connecting.id === d.id && this.discovery.invite(d.address), 700); // UDP may drop one

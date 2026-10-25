@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Cursor tab: share the pointer across the screen edge. Two direction cards, the
 // layout (pick where the other computer is; either side can change it) and the live state below. Behaviour: kvm.js and windows-helper.
 'use strict';
@@ -30,7 +30,7 @@ UI.tab({
     const resistance = UI.slider({ min: 0, max: 400, step: 10, format: (v) => (v ? v + ' px' : 'None') }, (v) => set({ resistancePx: v }));
     // A phone as the peer: how the pointer and keys reach it (settings.phone.input, the phone's own toggle too).
     const via = UI.segmented([{ value: 'adb', label: 'ADB' }, { value: 'phone', label: 'Accessibility' }], (v) => api.setPhone({ input: v, inputPicked: true }));
-    const viaRow = UI.row('Through', 'ADB: full control. Accessibility: TwinDesk on the phone taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth, no developer options', [via.el]);
+    const viaRow = UI.row('Through', 'ADB: full control. Accessibility: ZoldDesk on the phone taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth, no developer options', [via.el]);
     const pair = UI.dirCards(
       { on: { get: (s) => s.kvm.beDriven, set: (v) => set({ beDriven: v }) }, label: 'Use {name}’s mouse and keyboard on {me}', hint: 'Push the pointer past the edge there', rows: [
         UI.row('Pointer speed here', '', [speed]),

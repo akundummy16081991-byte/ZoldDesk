@@ -36,13 +36,13 @@ jobs:
         working-directory: mac
         run: |
           npm run dist:arm64
-          codesign --verify --deep --strict --verbose=2 dist/TwinDesk.app
+          codesign --verify --deep --strict --verbose=2 dist/ZoldDesk.app
           npm run dmg
 
       - name: Upload the DMG and matching Android APKs
         uses: actions/upload-artifact@v4
         with:
-          name: twindesk-macos-arm64
+          name: zolddesk-macos-arm64
           path: |
-            mac/dist/TwinDesk.dmg
-            android/dist/TwinDesk-*.apk
+            mac/dist/ZoldDesk.dmg
+            android/dist/ZoldDesk-*.apk

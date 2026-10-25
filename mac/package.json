@@ -1,8 +1,8 @@
 {
-  "name": "macshare-mac",
-  "productName": "TwinDesk",
+  "name": "zolddesk-mac",
+  "productName": "ZoldDesk",
   "version": "2.2.0",
-  "description": "TwinDesk — the Mac side: pairing, secure link, screen sharing and shared mouse/keyboard with a Windows PC.",
+  "description": "ZoldDesk — the Mac side: pairing, secure link, screen sharing and shared mouse/keyboard with a Windows PC.",
   "license": "GPL-3.0",
   "main": "main.js",
   "private": true,
@@ -14,7 +14,7 @@
     "dist:x64": "./build-app.sh x64",
     "dist:arm64": "./build-app.sh arm64",
     "dmg": "./build-dmg.sh",
-    "dmg:intel": "./build-app.sh x64 && ./build-dmg.sh Twindesk_intel.dmg"
+    "dmg:intel": "./build-app.sh x64 && ./build-dmg.sh ZoldDesk_intel.dmg"
   },
   "dependencies": {
     "ws": "^8.22.0"

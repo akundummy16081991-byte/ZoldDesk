@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // The computer's shared folder in Android's Files app and every app's file picker, while it shares
 // one with this phone (FolderShare.kt, shared/foldershare.js there): browse, open, save, new
 // folder, rename, delete. Files open from a copy here (apps want to seek in them); what an app
@@ -131,7 +131,7 @@ class PcShareProvider : DocumentsProvider() {
             add(Root.COLUMN_ROOT_ID, ROOT)
             add(Root.COLUMN_DOCUMENT_ID, "/")
             add(Root.COLUMN_TITLE, p.name)
-            add(Root.COLUMN_SUMMARY, "TwinDesk")
+            add(Root.COLUMN_SUMMARY, "ZoldDesk")
             add(Root.COLUMN_FLAGS, Root.FLAG_SUPPORTS_CREATE or Root.FLAG_SUPPORTS_IS_CHILD)
             add(Root.COLUMN_ICON, R.mipmap.ic_launcher)
             add(Root.COLUMN_MIME_TYPES, "*/*")
@@ -207,7 +207,7 @@ class PcShareProvider : DocumentsProvider() {
         else copy(documentId, signal)
         return ParcelFileDescriptor.open(f, m, writes) { e ->
             if (e == null) {
-                runCatching { call("PUT", "file", documentId, body = f) }.onFailure { Log.w("TwinDesk", "pcshare: write back $documentId: $it") }
+                runCatching { call("PUT", "file", documentId, body = f) }.onFailure { Log.w("ZoldDesk", "pcshare: write back $documentId: $it") }
                 notifyChildren(parentId(documentId))
             }
             f.delete()

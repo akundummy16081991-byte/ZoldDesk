@@ -57,10 +57,10 @@ jobs:
       - name: Upload packages
         uses: actions/upload-artifact@v4
         with:
-          name: twindesk-linux-x64
+          name: zolddesk-linux-x64
           path: |
-            linux/dist/TwinDesk-*
-            android/dist/TwinDesk-*.apk
+            linux/dist/ZoldDesk-*
+            android/dist/ZoldDesk-*.apk
 
       # Straight onto the release, no download and re-upload.
       - name: Upload to the release
@@ -69,4 +69,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release view "${{ inputs.tag }}" >/dev/null 2>&1 || gh release create "${{ inputs.tag }}" --draft --target main --title "${{ inputs.tag }}" --notes "" || true
-          gh release upload "${{ inputs.tag }}" linux/dist/TwinDesk-*.AppImage linux/dist/TwinDesk-*.deb --clobber
+          gh release upload "${{ inputs.tag }}" linux/dist/ZoldDesk-*.AppImage linux/dist/ZoldDesk-*.deb --clobber

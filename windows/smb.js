@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Network drives: this PC shares one folder with the Mac (a hidden,
 // network-only local account with a random password, made once with administrator rights), and
 // maps the Mac's shared folder as a drive. Credentials only travel over the paired link; ours are
@@ -53,7 +53,7 @@ class Smb {
     if (this.cfg.shareOn && c) this.link.send({ t: T.SMB_OFFER, share: SHARE, user: c.user, password: c.password, port: 445 });
   }
 
-  // One switch: on → share the folder (default %USERPROFILE%\TwinDesk); the admin
+  // One switch: on → share the folder (default %USERPROFILE%\ZoldDesk); the admin
   // prompt only comes the first time or after the folder changed. Off → the Mac unmounts; the share
   // and account stay, so switching on again needs no prompt.
   async setShareOn(on) {
@@ -183,11 +183,11 @@ class Smb {
     this._busy('');
   }
 
-  // Name the mapped drive in This PC: "TwinDesk on <Mac>" instead of the share path.
+  // Name the mapped drive in This PC: "ZoldDesk on <Mac>" instead of the share path.
   _label(addr, share) {
     const mac = this.link.snapshot().link.macName || 'the other computer';
     const key = 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\##' + addr + '#' + share;
-    exec('reg.exe', ['add', key, '/v', '_LabelFromReg', '/t', 'REG_SZ', '/d', 'TwinDesk on ' + mac, '/f']).catch(() => {});
+    exec('reg.exe', ['add', key, '/v', '_LabelFromReg', '/t', 'REG_SZ', '/d', 'ZoldDesk on ' + mac, '/f']).catch(() => {});
   }
 
   async _unmount(share) {

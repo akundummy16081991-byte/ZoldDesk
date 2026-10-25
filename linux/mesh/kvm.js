@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
 // Shared cursor and keyboard: state machine, Linux side, both roles (this computer drives a device, or a
 // device drives this computer). windows/mesh/kvm.js with ../kvm.js's Linux parts: gestures are done with
 // the desktop's own shortcuts; file drags out go through the helper's edge strip (X11, drop.c).
@@ -87,7 +87,7 @@ class Kvm {
       this.applyConfig();
       // A restarted helper has lost its state: nothing is captured or armed any more.
       if (this.mode === 'driving') this._release('');
-      else if (this.mode === 'driven') this._drivenHome('TwinDesk’s helper restarted', true);
+      else if (this.mode === 'driven') this._drivenHome('ZoldDesk’s helper restarted', true);
     });
     helper.on('event', (name, msg) => this._onHelper(name, msg));
     helper.on('exit', () => this.onChange());

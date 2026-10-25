@@ -440,9 +440,9 @@ class Vdd {
     try {
       const { dialog } = require('electron');
       const r = await dialog.showMessageBox({
-        type: 'question', title: 'TwinDesk', buttons: ['Switch it off', 'Leave it on'], defaultId: 0, cancelId: 1,
-        message: 'Switch off TwinDesk’s extra screen?',
-        detail: 'TwinDesk’s extra screen for Extend is on (' + names.join(', ') + '), so windows can end up on a screen nobody sees until Extend is on. '
+        type: 'question', title: 'ZoldDesk', buttons: ['Switch it off', 'Leave it on'], defaultId: 0, cancelId: 1,
+        message: 'Switch off ZoldDesk’s extra screen?',
+        detail: 'ZoldDesk’s extra screen for Extend is on (' + names.join(', ') + '), so windows can end up on a screen nobody sees until Extend is on. '
           + 'Switching it off makes your monitors go black for a moment.',
       });
       if (r.response !== 0) { for (const n of names) this.declined.add(n); return; }

@@ -1,11 +1,11 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // The calls' sound on this PC over Bluetooth (shared/phonehub.js makes this only while Calls and
 // its Bluetooth option are on with a phone connected): windows-helper's macshare-calls connects to
 // the phone as its hands-free, like a headset, and Windows plays the call through the PC's speakers
 // and microphone once asked to (each call is moved here as it starts), and not at all while a
 // Bluetooth headset is connected to the PC (whatever the default devices: its hands-free link and the
 // phone's can't both be up). Windows lets only an app with a package identity do that (PhoneLineTransportDevice),
-// so first its sparse package is registered for this user, pointing at where TwinDesk is (the
+// so first its sparse package is registered for this user, pointing at where ZoldDesk is (the
 // installer trusts its certificate). The phone has to be paired with this PC over Bluetooth once, in
 // Windows' own Bluetooth settings (the Calls page's setup). stop() ends it: the process lets the
 // phone line go and exits.
@@ -25,7 +25,7 @@ const BIN = path.join(ROOT, 'windows-helper', 'bin');
 const EXE = path.join(BIN, 'macshare-calls.exe');
 const MSIX = path.join(BIN, 'twindesk-calls.msix');
 const CER = path.join(BIN, 'twindesk-calls.cer');
-const PKG = 'TwinDesk.Calls';
+const PKG = 'TwinDesk.Calls'; // stable package identity; changing it breaks calls and updates
 const PKG_VERSION = '1.0.1.0'; // as windows-helper/calls/AppxManifest.xml
 const RETRY_MS = [5000, 15000, 30000, 60000, 120000];
 const SYSTEM_ONLY = 'Windows keeps calls over Bluetooth for Phone Link on this PC. Calls still ring, answer and dial here; their sound stays on the phone';
@@ -36,10 +36,10 @@ const parse = (s) => { try { return JSON.parse(String(s).trim().split('\n').pop(
 // Why Windows wouldn't add the package, in words.
 function addError(e) {
   if (/0x800B0109|0x800B010A|trust|certificate/i.test(e)) {
-    return `Windows doesn’t trust TwinDesk’s calls package. Reinstall TwinDesk, or (a dev build) as administrator: certutil -addstore TrustedPeople "${CER}"`;
+    return `Windows doesn’t trust ZoldDesk’s calls package. Reinstall ZoldDesk, or (a dev build) as administrator: certutil -addstore TrustedPeople "${CER}"`;
   }
-  if (/0x80073CFF|sideload|developer/i.test(e)) return 'Windows won’t add TwinDesk’s calls package: allow apps from any source in Settings › System › For developers';
-  return `TwinDesk’s calls package: ${String(e).slice(0, 140)}`;
+  if (/0x80073CFF|sideload|developer/i.test(e)) return 'Windows won’t add ZoldDesk’s calls package: allow apps from any source in Settings › System › For developers';
+  return `ZoldDesk’s calls package: ${String(e).slice(0, 140)}`;
 }
 
 class CallAudio extends EventEmitter {
@@ -176,11 +176,11 @@ class CallAudio extends EventEmitter {
     let m;
     try { m = JSON.parse(line); } catch { return; }
     if (m.ev === 'info') {
-      // Started without the package's identity (registered for TwinDesk somewhere else, say a dev
+      // Started without the package's identity (registered for ZoldDesk somewhere else, say a dev
       // copy): registered again here, once.
       if (m.identity === false) {
         this._end();
-        if (this.forced) { this.error = 'Windows didn’t give macshare-calls TwinDesk’s package identity'; return this._set('unavailable'); }
+        if (this.forced) { this.error = 'Windows didn’t give macshare-calls ZoldDesk’s package identity'; return this._set('unavailable'); }
         this.forced = true;
         return this._launch(this.gen, true);
       }
@@ -211,12 +211,12 @@ class CallAudio extends EventEmitter {
       if (m.state === 'connecting') return this._set('connecting');
       if (m.access === 'DeniedByUser') {
         this.denied = true;
-        this.error = 'Windows’ privacy settings keep calls from TwinDesk: allow it in Settings › Privacy & security › Phone calls, then Connect';
+        this.error = 'Windows’ privacy settings keep calls from ZoldDesk: allow it in Settings › Privacy & security › Phone calls, then Connect';
         this.tries = RETRY_MS.length + 1;
         return this._set('failed');
       }
       // Windows gave this phone's line to another app (one registered for it before, Phone Link
-      // say): it's TwinDesk's once the phone is paired again.
+      // say): it's ZoldDesk's once the phone is paired again.
       if (m.error === 'unregistered') {
         this.denied = true;
         this.error = `Windows keeps ${this.phoneName || 'the phone'}’s calls for another app: Forget it below and pair it again`;

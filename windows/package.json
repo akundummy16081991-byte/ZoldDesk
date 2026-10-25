@@ -1,8 +1,8 @@
 {
-  "name": "macshare-win",
-  "productName": "TwinDesk",
+  "name": "zolddesk-windows",
+  "productName": "ZoldDesk",
   "version": "2.2.0",
-  "description": "TwinDesk for Windows: pair with a Mac, view its screen, share mouse, keyboard and clipboard.",
+  "description": "ZoldDesk for Windows: pair with a Mac, view its screen, share mouse, keyboard and clipboard.",
   "license": "GPL-3.0",
   "private": true,
   "main": "main.js",

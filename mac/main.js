@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Main process: lifecycle, windows, tray, IPC, and the state pushed to the control window.
 //
 // State object sent to the control window ('state' channel) on every change:
@@ -6,7 +6,7 @@
 //   macName, macId, fp,                       // this Mac's identity (fp = cert SHA-256 hex)
 //   addresses: ['192.168.1.5', ...],           // this Mac's IPv4 addresses (the server listens on P.PORT)
 //   discovery: { on, error, localNetwork },      // discovery.js status
-//   found: [{ id, name, os, address, port, invited }],   // other TwinDesk computers nearby
+//   found: [{ id, name, os, address, port, invited }],   // other ZoldDesk computers nearby
 //   guest: { status: {state, message}, pairing: null|{phase, name, address, code, error}, hosts: [...] },  // link.js
 //   connect: { busy, message, error },           // last "Connect by address" / Pair attempt
 //   serverError: null | 'message',            // e.g. port already in use
@@ -45,7 +45,7 @@ app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
 // (jitterBufferTarget). FlexFEC repairs lost packets without waiting a round trip for a resend; it
 // costs bandwidth only while packets are being lost.
 app.commandLine.appendSwitch('force-fieldtrials', 'WebRTC-ForceSendPlayoutDelay/min_ms:0,max_ms:0/WebRTC-FlexFEC-03/Enabled/WebRTC-FlexFEC-03-Advertised/Enabled/');
-// Renamed to TwinDesk: settings, pairing and the identity stay in the old folder.
+// Renamed to ZoldDesk: settings, pairing and the identity stay in the old folder.
 app.setPath('userData', process.env.MACSHARE_PROFILE || path.join(app.getPath('appData'), 'MacShare')); // PROFILE: a second dev copy
 // Multi-device switched on (multi.js, docs/multi-device.md): mesh/main.js runs instead of everything below.
 if (require('./multi').on()) return void require('./mesh/main.js');
@@ -263,7 +263,7 @@ function handleSendLink(url) {
   try { u = new URL(url); } catch { return; }
   const paths = u.searchParams.getAll('p').filter((x) => x.startsWith('/')).slice(0, 1000);
   if (!paths.length) return;
-  if (!peer.current) return hud && hud.show('away', 'Not connected', 'Open TwinDesk on the other computer first');
+  if (!peer.current) return hud && hud.show('away', 'Not connected', 'Open ZoldDesk on the other computer first');
   actions.sendFiles(paths);
   hud && hud.show('away', `Sending ${paths.length} item${paths.length === 1 ? '' : 's'} to ${peer.current.name}`);
 }
@@ -290,11 +290,11 @@ function refreshPermissions() {
   pushState();
 }
 
-// After an update signed differently (every ad-hoc build was), macOS still lists TwinDesk as
+// After an update signed differently (every ad-hoc build was), macOS still lists ZoldDesk as
 // allowed but the grant belongs to the old signature, so the switches are on and nothing works,
 // and switching them on again does nothing. Once per new signature: whatever reads as missing is
 // reset (tccutil drops the stale entry), so Allow asks afresh and the switch in System Settings
-// really is ours. Builds signed with TwinDesk's certificate keep one signature (build-app.sh).
+// really is ours. Builds signed with ZoldDesk's certificate keep one signature (build-app.sh).
 let staleChecked = false;
 function clearStalePermissions() {
   if (staleChecked || !app.isPackaged) return;
@@ -336,7 +336,7 @@ function createWindow() {
     height: 720,
     minWidth: 760,
     minHeight: 520,
-    title: 'TwinDesk',
+    title: 'ZoldDesk',
     show: false,
     titleBarStyle: 'hiddenInset', // the sidebar runs up under the traffic lights
     vibrancy: 'sidebar',
@@ -409,7 +409,7 @@ function updateTray() {
     found.map((d) => [d.id, d.name, d.os]), updates && updates.status.available && updates.status.latest]);
   if (key === trayKey) return;
   trayKey = key;
-  tray.setToolTip(c ? `TwinDesk: ${c.name}` : 'TwinDesk');
+  tray.setToolTip(c ? `ZoldDesk: ${c.name}` : 'ZoldDesk');
   const check = (label, checked, click, enabled = true) => ({ label, type: 'checkbox', checked: !!checked, enabled, click });
   tray.setContextMenu(
     Menu.buildFromTemplate([
@@ -441,9 +441,9 @@ function updateTray() {
       ...(again ? [{ label: `${g.status.busy ? 'Take Over' : 'Connect to'} ${g.hosts[0].name}`, click: () => actions.connectAgain() }] : []),
       check('Show a Popup When Switching', settings.app.hud !== false, (i) => actions.setApp({ hud: i.checked })),
       { type: 'separator' },
-      ...(updates && updates.status.available ? [{ label: `Download TwinDesk ${updates.status.latest}…`, click: () => updates.open() }] : []),
-      { label: 'Open TwinDesk…', click: showWindow },
-      { label: 'Quit TwinDesk', click: () => app.quit() },
+      ...(updates && updates.status.available ? [{ label: `Download ZoldDesk ${updates.status.latest}…`, click: () => updates.open() }] : []),
+      { label: 'Open ZoldDesk…', click: showWindow },
+      { label: 'Quit ZoldDesk', click: () => app.quit() },
     ]),
   );
 }
@@ -590,7 +590,7 @@ app.whenReady().then(() => {
     if (b.kind === 'send') hud.show('driven', `Received ${b.files} file${b.files === 1 ? '' : 's'} from ${peer.current ? peer.current.name : 'the other computer'}`);
   });
   // Files on their way, live: the percentage beside the menu bar icon, ↓ coming in, ↑ going out
-  // (macOS notifications have no progress bar, and TwinDesk has no Dock icon to put one on).
+  // (macOS notifications have no progress bar, and ZoldDesk has no Dock icon to put one on).
   let trayPct = '';
   setInterval(() => {
     const sum = (list, k) => list.reduce((a, f) => [a[0] + (f[k] || 0), a[1] + (f.size || 0)], [0, 0]);

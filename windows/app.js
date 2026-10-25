@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Main window shell: sidebar + one page per registered tab (ui-*.js), pairing banner, accent
 // rendering of the state pushed by main. Same structure and look as the Mac's.
 'use strict';
@@ -212,7 +212,7 @@
       $('pair-code-wrap').hidden = true;
       $('pair-match').hidden = true;
       $('pair-cancel').textContent = 'Cancel';
-      $('pair-hint').textContent = 'TwinDesk on ' + inv.name + ' asks to pair with this PC. Press Pair there, then compare the codes.';
+      $('pair-hint').textContent = 'ZoldDesk on ' + inv.name + ' asks to pair with this PC. Press Pair there, then compare the codes.';
       return;
     }
     const p = s.pairing;

@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith, Erdoğan Yeşil. GPL-3.0, see LICENSE.
 // The hub joins the link layer (server.js, pairing.js, links.js, session.js) to the mesh
 // (shared/mesh.js), as docs/mesh.md describes. Port of windows/hub.js; plain Node: no Electron.
 //
@@ -196,7 +196,7 @@ class Hub extends EventEmitter {
     server.on('listenError', (err) => {
       this._host = {
         on: false,
-        error: err.code === 'EADDRINUSE' ? 'Port ' + P.PORT + ' is in use (another copy of TwinDesk?)' : err.code || err.message,
+        error: err.code === 'EADDRINUSE' ? 'Port ' + P.PORT + ' is in use (another copy of ZoldDesk?)' : err.code || err.message,
       };
       this._change();
     });

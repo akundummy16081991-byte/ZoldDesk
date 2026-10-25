@@ -1,5 +1,5 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
-// The setup screen (like the Mac's): shown on start while something TwinDesk needs isn't allowed
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// The setup screen (like the Mac's): shown on start while something ZoldDesk needs isn't allowed
 // yet, one row per permission with its own Allow button. "Skip for now" hides it until something
 // else goes missing (the skipped set is remembered); General › Setup has the same rows.
 package com.twindesk.android
@@ -99,7 +99,7 @@ fun SetupScreen(core: Core, ctx: Context, v: Int, done: () -> Unit) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Logo(84)
-            Text("Set up TwinDesk", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = pal.text, modifier = Modifier.padding(top = 12.dp))
+            Text("Set up ZoldDesk", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = pal.text, modifier = Modifier.padding(top = 12.dp))
             Text(
                 "Allow these so this device and your computer work as one. You can change them any time in General › Setup.",
                 color = pal.muted, fontSize = 14.sp, textAlign = TextAlign.Center, modifier = Modifier.padding(top = 6.dp, bottom = 22.dp),
@@ -129,7 +129,7 @@ fun SetupScreen(core: Core, ctx: Context, v: Int, done: () -> Unit) {
                 modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = pal.accent, contentColor = Color.White),
             ) { Text(if (ready) "Continue" else "Skip for now", modifier = Modifier.padding(vertical = 4.dp)) }
-            if (!ready) Text("TwinDesk works without these, but some features won’t.", color = pal.faint, fontSize = 12.5.sp, modifier = Modifier.padding(top = 8.dp))
+            if (!ready) Text("ZoldDesk works without these, but some features won’t.", color = pal.faint, fontSize = 12.5.sp, modifier = Modifier.padding(top = 8.dp))
         }
     }
 }

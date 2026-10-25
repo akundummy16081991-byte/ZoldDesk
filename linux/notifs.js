@@ -134,7 +134,7 @@ class Notifs {
     }
     const str = (a) => (a && a.startsWith('string "') ? a.slice(8).replace(/"$/, '') : '');
     const appName = str(args[0]);
-    if (!appName || /^(TwinDesk|Electron|macshare)/i.test(appName)) return; // ours (from the other computer)
+    if (!appName || /^(ZoldDesk|TwinDesk|Electron|macshare)/i.test(appName)) return; // ours (from the other computer)
     this._local({ id: String(Date.now()), app: appName, appName, title: str(args[3]), body: str(args[4]), at: Date.now() });
   }
 

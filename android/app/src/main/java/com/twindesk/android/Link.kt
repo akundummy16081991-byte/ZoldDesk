@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // The phone's side of the session: a WSS client with the computer's certificate pinned, pairing as
 // the initiator (numeric comparison), hello, liveness. Like windows/link.js and mac/link.js, except
 // that a phone connects only when asked (or to resume a session that dropped by accident).
@@ -77,7 +77,7 @@ class Link(
     private var helloTimer: ScheduledFuture<*>? = null
     var bleRx: () -> Long = { 0L } // Ble.lastDown: bytes arriving through Bluetooth count as alive
 
-    private fun run(block: () -> Unit) = exec.execute { try { block() } catch (e: Exception) { Log.e("TwinDesk", "link", e) } }
+    private fun run(block: () -> Unit) = exec.execute { try { block() } catch (e: Exception) { Log.e("ZoldDesk", "link", e) } }
 
     // usbPort: connect through the cable (adb reverse) instead of the network; the host's own
     // address stays as it is, for when the cable comes out.
@@ -225,7 +225,7 @@ class Link(
         host?.let { h ->
             if (h.address != pendingAddress) { h.address = pendingAddress; store.putHost(h) }
         }
-        Log.i("TwinDesk", "session moved to $pendingAddress")
+        Log.i("ZoldDesk", "session moved to $pendingAddress")
         events.onChange()
     }
 
@@ -240,7 +240,7 @@ class Link(
         alt = null
         lastRxOf.remove(a)
         a.close(1000, null)
-        Log.i("TwinDesk", "Bluetooth fallback closed: the session stays on Wi-Fi")
+        Log.i("ZoldDesk", "Bluetooth fallback closed: the session stays on Wi-Fi")
         events.onChange()
     }
 
@@ -250,7 +250,7 @@ class Link(
         alt = null
         ws = a
         ble = altBle
-        Log.i("TwinDesk", "session back on ${if (ble) "Bluetooth" else "the network"}")
+        Log.i("ZoldDesk", "session back on ${if (ble) "Bluetooth" else "the network"}")
         events.onChange()
         return true
     }
@@ -373,7 +373,7 @@ class Link(
                 val limit = if (onBle) Proto.BLE_TIMEOUT_MS else Proto.TIMEOUT_MS
                 val rx = maxOf(lastRxOf[w] ?: lastRx, if (onBle) bleRx() else 0L)
                 if (now - rx > limit) {
-                    Log.i("TwinDesk", "${if (onBle) "Bluetooth" else "network"} socket silent for ${now - rx} ms, closing")
+                    Log.i("ZoldDesk", "${if (onBle) "Bluetooth" else "network"} socket silent for ${now - rx} ms, closing")
                     if (w === ws && alt == null) message = "Stopped answering"
                     w.cancel()
                 } else w.send(msg(Proto.T.PING, "ts" to now).toString())
@@ -387,7 +387,7 @@ class Link(
         Proto.E.PAIR_REFUSED to "Pairing was refused.",
         Proto.E.PAIR_TIMEOUT to "Pairing timed out.",
         Proto.E.BUSY to "That computer is busy pairing with another device.",
-        Proto.E.VERSION_MISMATCH to "That computer runs a different TwinDesk version. Update both.",
+        Proto.E.VERSION_MISMATCH to "That computer runs a different ZoldDesk version. Update both.",
     )
 
     private fun onError(m: JSONObject) {
@@ -422,7 +422,7 @@ class Link(
     }
 
     private fun onClose(failure: String?) {
-        Log.i("TwinDesk", "link closed: mode=$mode state=$state ble=$ble failure=$failure code=$lastCode")
+        Log.i("ZoldDesk", "link closed: mode=$mode state=$state ble=$ble failure=$failure code=$lastCode")
         pinger?.cancel(false)
         helloTimer?.cancel(false)
         ws = null

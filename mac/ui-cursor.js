@@ -1,4 +1,4 @@
-// TwinDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
+// ZoldDesk — Copyright (C) 2026 inukaasith. GPL-3.0, see LICENSE.
 // Cursor tab: where the PC is (layout picker), directions, edge resistance, speed, scrolling.
 'use strict';
 
@@ -46,7 +46,7 @@ UI.tab({
 
     // A phone as the peer: how the pointer and keys reach it (settings.phone.input, the phone's own toggle too).
     const via = UI.segmented([{ value: 'adb', label: 'ADB' }, { value: 'phone', label: 'Accessibility' }], (v) => api.setPhone({ input: v, inputPicked: true }));
-    const viaRow = UI.row('Through', 'ADB: full control. Accessibility: TwinDesk on the phone taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth, no developer options', [via.el]);
+    const viaRow = UI.row('Through', 'ADB: full control. Accessibility: ZoldDesk on the phone taps and types itself, over Wi-Fi, Wi-Fi Direct or Bluetooth, no developer options', [via.el]);
     // A row whose label follows the other computer's name (UI.names fills it on render).
     const peerRow = (label, hint, controls) => {
       const r = UI.row(label, hint, controls);
